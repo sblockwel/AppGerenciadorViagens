@@ -18,6 +18,12 @@ import androidx.compose.ui.unit.dp
 import com.example.appgerenciadorviagens.ui.theme.AppGerenciadorViagensTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.appgerenciadorviagens.viewModel.PessoaViewModel
+import com.example.appgerenciadorviagens.componente.PasswordField
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
