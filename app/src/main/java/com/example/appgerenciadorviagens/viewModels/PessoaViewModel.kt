@@ -1,4 +1,4 @@
-package com.example.appgerenciadorviagens.viewModel
+package com.example.appgerenciadorviagens.viewModels
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -6,11 +6,11 @@ import androidx.compose.runtime.*
 
 class PessoaViewModel : ViewModel() {
 
-    var nome by mutableStateOf("")
+    var username by mutableStateOf("")
 
-    var senha by mutableStateOf("")
+    var password by mutableStateOf("")
 
-    var dataNascimento by mutableStateOf("")
+    var confirmPassword by mutableStateOf("")
 
     var email by mutableStateOf("")
 

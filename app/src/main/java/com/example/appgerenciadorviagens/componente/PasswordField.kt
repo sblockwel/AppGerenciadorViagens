@@ -8,18 +8,18 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.*
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 
 
 @Composable
-fun PasswordField(value: String,
-                  onChange: (String) -> Unit,
-                  label: String = "Senha"
+fun PasswordField(
+    value: String,
+    onChange: (String) -> Unit,
+    label: String = "Senha"
 ) {
-    var passwordVisibility by remember{
+    var passwordVisibility by remember {
         mutableStateOf(false)
     }
     OutlinedTextField(

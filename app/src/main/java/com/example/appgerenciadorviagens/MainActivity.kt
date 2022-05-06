@@ -1,29 +1,24 @@
 package com.example.appgerenciadorviagens
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import com.example.appgerenciadorviagens.ui.theme.AppGerenciadorViagensTheme
-import androidx.compose.runtime.*
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.appgerenciadorviagens.viewModel.PessoaViewModel
-import com.example.appgerenciadorviagens.componente.PasswordField
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import com.example.appgerenciadorviagens.ui.theme.AppGerenciadorViagensTheme
+import com.example.appgerenciadorviagens.views.LoginView
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,24 +38,55 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun App() {
-    var userState by remember {
-        mutableStateOf("")
-    }
-    var isLogged by remember {
-        mutableStateOf(false)
-    }
-    if (isLogged) {
-        Welcome(name = userState)
-    } else {
-        Login(userState,
-            onUserChange ={
-                userState = it
-            },
-            onSuccess = {
-            isLogged = true
-        })
-    }
+    LoginView().Login();
+    /*val navController = rememberNavController()
+    val items = listOf(
+        ScreenManagger.Home,
+        ScreenManagger.Profile,
+        ScreenManagger.About
+    )
+    Scaffold(
+        bottomBar = {
+            BottomNavigation {
+                val navBackStackEntry by navController.currentBackStackEntryAsState()
+                val currentDestination = navBackStackEntry?.destination
+                items.forEach { screen ->
+                    BottomNavigationItem(
+                        icon = { Icon(Icons.Filled.screen.icon, contentDescription = null) },
+                        label = { Text(stringResource(screen.resourceId)) },
+                        selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
+                        onClick = {
+                            navController.navigate(screen.route) {
+                                popUpTo(navController.graph.findStartDestination().id) {
+                                    saveState = true
+                                }
+                                launchSingleTop = true
+                                restoreState = true
+                            }
+                        }
+                    )
+                }
+            }
+        }
+    ) { innerPadding ->
+        NavHost(navController, startDestination = ScreenManagger.Home.route, Modifier.padding(innerPadding)) {
+            composable(ScreenManagger.Home.route) { HomeCompose() }
+            composable(ScreenManagger.Profile.route) { ProfileCompose(navController = navController) }
+            composable(ScreenManagger.About.route){ AboutCompose() }
+        }
+    }*/
 
+    NavHost(navController = navController, startDestination = "home") {
+        composable("Home"){
+            HomeCompose()
+        }
+        composable("Profile"){
+            ProfileCompose(navController)
+        }
+        composable("About"){
+            AboutCompose()
+        }
+    }
 }
 
 @Composable
@@ -76,93 +102,6 @@ fun Welcome(name: String) {
     }
 }
 
-@Composable
-fun Login(user: String, onUserChange: (String) -> Unit, onSuccess: () -> Unit) {
-    Card(
-        elevation = 10.dp,
-        modifier = Modifier
-            .padding(all = 8.dp)
-            .fillMaxWidth()
-
-    ) {
-        Column(
-            verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
-                .padding(all = 25.dp)
-                .fillMaxSize()
-        ) {
-            var passwordState by remember {
-                mutableStateOf("")
-            }
-
-            val context = LocalContext.current
-
-            Image(
-                painter = painterResource(id = R.drawable.travelicon),
-                contentDescription = "Logo",
-                modifier = Modifier
-                    .size(100.dp)
-                    .padding(start = 8.dp)
-            )
-            if (user.isNotBlank()) {
-                Text(text = "Bem-Vindo(a), ${user}", style = MaterialTheme.typography.h6)
-            }
-            Column(
-                verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
-                    .padding(all = 25.dp)
-                    .fillMaxSize()
-            ) {
-                OutlinedTextField(
-                    modifier = Modifier.fillMaxWidth(),
-                    value = user,
-                    onValueChange = { onUserChange(it) },
-                    label = { Text("Usuário") },
-                )
-                OutlinedTextField(
-                    modifier = Modifier.fillMaxWidth(),
-                    value = passwordState,
-                    onValueChange = { passwordState = it },
-                    label = { Text("Senha") },
-                )
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    TextButton(onClick = { /*TODO*/ }) {
-                        Text(text = "Esqueci a senha")
-                    }
-                    Spacer(modifier = Modifier.height(8.dp))
-                    //Text(text = "  |  ")
-                    TextButton(onClick = { /*TODO*/ }) {
-                        Text(text = "Cadastrar-se")
-                    }
-                }
-                Spacer(
-                    modifier = Modifier.height(16.dp)
-                )
-                Button(
-                    onClick = {
-                        if (user.equals("admin") && passwordState.equals("admin")) {
-                            onSuccess()
-                            Toast.makeText(context, "Logado!", Toast.LENGTH_SHORT).show()
-                        } else {
-                            Toast.makeText(context, "Login inválido!", Toast.LENGTH_SHORT).show()
-
-                        }
-                    },
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(text = "Entrar")
-                }
-
-            }
-
-        }
-    }
-
-}
 
 @Preview(showBackground = true)
 @Composable
