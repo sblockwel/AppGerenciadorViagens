@@ -15,10 +15,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.appgerenciadorviagens.ui.theme.AppGerenciadorViagensTheme
+import com.example.appgerenciadorviagens.views.AboutView
 import com.example.appgerenciadorviagens.views.LoginView
+import com.example.appgerenciadorviagens.views.RegisterView
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,54 +42,19 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun App() {
     LoginView().Login();
-    /*val navController = rememberNavController()
-    val items = listOf(
-        ScreenManagger.Home,
-        ScreenManagger.Profile,
-        ScreenManagger.About
-    )
-    Scaffold(
-        bottomBar = {
-            BottomNavigation {
-                val navBackStackEntry by navController.currentBackStackEntryAsState()
-                val currentDestination = navBackStackEntry?.destination
-                items.forEach { screen ->
-                    BottomNavigationItem(
-                        icon = { Icon(Icons.Filled.screen.icon, contentDescription = null) },
-                        label = { Text(stringResource(screen.resourceId)) },
-                        selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
-                        onClick = {
-                            navController.navigate(screen.route) {
-                                popUpTo(navController.graph.findStartDestination().id) {
-                                    saveState = true
-                                }
-                                launchSingleTop = true
-                                restoreState = true
-                            }
-                        }
-                    )
-                }
-            }
+    /*
+    val navController = rememberNavController()
+    NavHost(navController = navController, startDestination = "login") {
+        composable("Login"){
+            LoginView()
         }
-    ) { innerPadding ->
-        NavHost(navController, startDestination = ScreenManagger.Home.route, Modifier.padding(innerPadding)) {
-            composable(ScreenManagger.Home.route) { HomeCompose() }
-            composable(ScreenManagger.Profile.route) { ProfileCompose(navController = navController) }
-            composable(ScreenManagger.About.route){ AboutCompose() }
-        }
-    }*/
-
-    NavHost(navController = navController, startDestination = "home") {
-        composable("Home"){
-            HomeCompose()
-        }
-        composable("Profile"){
-            ProfileCompose(navController)
+        composable("Register"){
+            RegisterView()
         }
         composable("About"){
-            AboutCompose()
+            AboutView()
         }
-    }
+    }*/
 }
 
 @Composable

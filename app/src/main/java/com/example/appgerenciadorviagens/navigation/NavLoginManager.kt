@@ -10,10 +10,9 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import com.example.appgerenciadorviagens.R
 
 sealed class NavLoginManager(val route: String,
-                            @StringRes val resourceId: Int,
-                            val icon: ImageVector
+                            @StringRes val resourceId: Int
 ) {
-    object Login: NavLoginManager("Home", R.string.login, Icons.Filled.Login)
-    object Register : NavLoginManager("profile", R.string.profile, Icons.Filled.Regis)
-    object About : NavLoginManager("about", R.string.about, Icons.Filled.Face)
+    object Login: NavLoginManager("login", R.string.login)
+    object Register : NavLoginManager("register", R.string.register)
+    object About : NavLoginManager("about", R.string.about)
 }

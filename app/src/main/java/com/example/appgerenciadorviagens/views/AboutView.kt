@@ -1,5 +1,5 @@
 package com.example.appgerenciadorviagens.views
 
-class RegisterView() {
+class AboutView() {
 
 }
