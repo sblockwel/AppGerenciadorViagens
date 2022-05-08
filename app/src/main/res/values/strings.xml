@@ -3,4 +3,10 @@
     <string name="login">login</string>
     <string name="register">register</string>
     <string name="about">about</string>
+    <string name="forgotPassword">forgotPassword</string>
+    <string name="home">home</string>
+    <string name="travels">travels</string>
+    <string name="Home">Home</string>
+    <string name="Travels">Travels</string>
+    <string name="About">About</string>
 </resources>

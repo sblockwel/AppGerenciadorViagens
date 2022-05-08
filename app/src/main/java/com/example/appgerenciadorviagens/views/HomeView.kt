@@ -5,8 +5,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 
 @Composable
-fun aboutView() {
+fun homeView(){
     Column() {
-        Text(text = "About")
+        Text(text = "Home")
     }
 }

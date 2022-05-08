@@ -11,22 +11,44 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.example.appgerenciadorviagens.R
 import com.example.appgerenciadorviagens.componente.PasswordField
 import com.example.appgerenciadorviagens.viewModels.LoginViewModel
 
-class LoginView() {
+@Composable
+fun loginView(navController: NavController) {
 
-    @Composable
-    fun Login() {
-        val loginModel: LoginViewModel = viewModel()
-        Card(
-            elevation = 10.dp,
+    val loginModel: LoginViewModel = viewModel()
+    Card(
+        elevation = 10.dp,
+        modifier = Modifier
+            .padding(all = 8.dp)
+            .fillMaxWidth()
+
+    ) {
+        Column(
+            verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically),
+            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
-                .padding(all = 8.dp)
-                .fillMaxWidth()
-
+                .padding(all = 25.dp)
+                .fillMaxSize()
         ) {
+            val context = LocalContext.current
+
+            Image(
+                painter = painterResource(id = R.drawable.travelicon),
+                contentDescription = "Logo",
+                modifier = Modifier
+                    .size(100.dp)
+                    .padding(start = 8.dp)
+            )
+            if (loginModel.username.isNotBlank()) {
+                Text(
+                    text = "Bem-Vindo(a), ${loginModel.username}",
+                    style = MaterialTheme.typography.h6
+                )
+            }
             Column(
                 verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically),
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -34,80 +56,52 @@ class LoginView() {
                     .padding(all = 25.dp)
                     .fillMaxSize()
             ) {
-                val context = LocalContext.current
-
-                Image(
-                    painter = painterResource(id = R.drawable.travelicon),
-                    contentDescription = "Logo",
-                    modifier = Modifier
-                        .size(100.dp)
-                        .padding(start = 8.dp)
+                OutlinedTextField(
+                    modifier = Modifier.fillMaxWidth(),
+                    value = loginModel.username,
+                    onValueChange = { loginModel.username = it },
+                    label = { Text("Usuário") },
                 )
-                if (loginModel.username.isNotBlank()) {
-                    Text(
-                        text = "Bem-Vindo(a), ${loginModel.username}",
-                        style = MaterialTheme.typography.h6
-                    )
-                }
-                Column(
-                    verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier
-                        .padding(all = 25.dp)
-                        .fillMaxSize()
+                PasswordField(
+                    value = loginModel.password,
+                    onChange = { loginModel.password = it },
+                    label = "Senha"
+                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    OutlinedTextField(
-                        modifier = Modifier.fillMaxWidth(),
-                        value = loginModel.username,
-                        onValueChange = { loginModel.username = it },
-                        label = { Text("Usuário") },
-                    )
-                    OutlinedTextField(
-                        modifier = Modifier.fillMaxWidth(),
-                        value = loginModel.password,
-                        onValueChange = { loginModel.password = it },
-                        label = { Text("Senha") },
-                    )
-                    PasswordField(
-                        value = loginModel.password,
-                        onChange = { loginModel.password = it }
-                    )
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        TextButton(onClick = { /*TODO*/ }) {
-                            Text(text = "Esqueci a senha")
-                        }
-                        Spacer(modifier = Modifier.height(8.dp))
-                        //Text(text = "  |  ")
-                        TextButton(onClick = { /*TODO*/ }) {
-                            Text(text = "Cadastrar-se")
-                        }
+                    TextButton(onClick = { navController.navigate("forgotPassword") }) {
+                        Text(text = "Esqueci a senha")
                     }
-                    Spacer(
-                        modifier = Modifier.height(16.dp)
-                    )
-                    Button(
-                        onClick = {
-                            if (loginModel.username.equals("admin") && loginModel.password.equals("admin")) {
-                                //onSuccess()
-                                Toast.makeText(context, "Logado!", Toast.LENGTH_SHORT).show()
-                            } else {
-                                Toast.makeText(context, "Login inválido!", Toast.LENGTH_SHORT)
-                                    .show()
-
-                            }
-                        },
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Text(text = "Entrar")
+                    Spacer(modifier = Modifier.height(8.dp))
+                    TextButton(onClick = { navController.navigate("register") }) {
+                        Text(text = "Cadastrar-se")
                     }
+                }
+                Spacer(
+                    modifier = Modifier.height(16.dp)
+                )
+                Button(
+                    onClick = {
+                        if (loginModel.username.equals("admin") && loginModel.password.equals("admin")) {
+                            //onSuccess()
+                            Toast.makeText(context, "Logado!", Toast.LENGTH_SHORT).show()
+                            navController.navigate("home")
+                        } else {
+                            Toast.makeText(context, "Login inválido!", Toast.LENGTH_SHORT)
+                                .show()
 
+                        }
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(text = "Entrar")
                 }
 
             }
-        }
 
+        }
     }
+
 }
 

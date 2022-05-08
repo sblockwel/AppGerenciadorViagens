@@ -17,7 +17,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 fun PasswordField(
     value: String,
     onChange: (String) -> Unit,
-    label: String = "Senha"
+    label: String
 ) {
     var passwordVisibility by remember {
         mutableStateOf(false)

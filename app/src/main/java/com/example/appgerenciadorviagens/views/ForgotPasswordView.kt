@@ -11,14 +11,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavHostController
-import com.example.appgerenciadorviagens.componente.PasswordField
-import com.example.appgerenciadorviagens.viewModels.PessoaViewModel
-
+import com.example.appgerenciadorviagens.viewModels.ForgotPasswordViewModel
 
 @Composable
-fun registerView(navController: NavHostController) {
-    val pessoaModel: PessoaViewModel = viewModel()
+fun forgotPasswordView() {
+    val forgotModel: ForgotPasswordViewModel = viewModel()
+
     Card(
         elevation = 10.dp,
         modifier = Modifier
@@ -37,39 +35,20 @@ fun registerView(navController: NavHostController) {
 
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
-                value = pessoaModel.username,
-                onValueChange = { pessoaModel.username = it },
-                label = { Text("Usuário") },
-            )
-            OutlinedTextField(
-                modifier = Modifier.fillMaxWidth(),
-                value = pessoaModel.email,
-                onValueChange = { pessoaModel.email = it },
+                value = forgotModel.email,
+                onValueChange = { forgotModel.email = it },
                 label = { Text("E-mail") },
-            )
-            PasswordField(
-                value = pessoaModel.password,
-                onChange = { pessoaModel.password = it },
-                label = "Senha"
-            )
-            PasswordField(
-                value = pessoaModel.confirmPassword,
-                onChange = { pessoaModel.confirmPassword = it },
-                label = "Confirmar senha"
             )
             Spacer(
                 modifier = Modifier.height(16.dp)
             )
             Button(
                 onClick = {
-                    pessoaModel.register()
+                    forgotModel.recoverPassword()
                 },
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text(text = "Entrar")
-            }
-            Button(onClick = { navController.navigateUp() }) {
-                Text(text = "Voltar")
+                Text(text = "Enviar")
             }
         }
     }
