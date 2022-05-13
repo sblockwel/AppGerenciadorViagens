@@ -11,13 +11,15 @@ import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.runtime.*
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import java.lang.reflect.Modifier
 
 
 @Composable
 fun PasswordField(
     value: String,
     onChange: (String) -> Unit,
-    label: String
+    label: String,
+    modifier: androidx.compose.ui.Modifier
 ) {
     var passwordVisibility by remember {
         mutableStateOf(false)
@@ -28,6 +30,7 @@ fun PasswordField(
         label = {
             Text(text = label)
         },
+        modifier = modifier,
         visualTransformation = if (passwordVisibility)
             VisualTransformation.None
         else

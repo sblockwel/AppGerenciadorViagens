@@ -12,6 +12,6 @@ sealed class NavHomeManager(
     val icon: ImageVector
 ) {
     object Home : NavHomeManager("home", R.string.Home, Icons.Filled.Home)
-    object Travels : NavHomeManager("travels", R.string.Travels, Icons.Filled.Map)
-    object About : NavHomeManager("about", R.string.About, Icons.Filled.Help)
+    object Travels : NavHomeManager("travels", R.string.Travels, Icons.Filled.Face)
+    object About : NavHomeManager("about", R.string.About, Icons.Filled.Info)
 }

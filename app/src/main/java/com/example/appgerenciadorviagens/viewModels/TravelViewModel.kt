@@ -4,20 +4,21 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import com.example.appgerenciadorviagens.viewModels.enum.TravelTypeEnum
 
 class TravelViewModel : ViewModel() {
 
-    var id by mutableStateOf("")
+    var id by mutableStateOf(0)
 
-    var destino by mutableStateOf("")
+    var destiny by mutableStateOf("")
 
-    var tipo by mutableStateOf("")
+    var type by mutableStateOf(TravelTypeEnum.LAZER)
 
-    var dataChegada by mutableStateOf("")
+    var arrivalDate by mutableStateOf("")
 
-    var dataPartida by mutableStateOf("")
+    var departureDate by mutableStateOf("")
 
-    var orcamento by mutableStateOf("")
+    var budget by mutableStateOf(0.00)
 
-    var usuario by mutableStateOf("")
+    var user by mutableStateOf("")
 }

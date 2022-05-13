@@ -14,6 +14,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.appgerenciadorviagens.R
 import com.example.appgerenciadorviagens.componente.PasswordField
+import com.example.appgerenciadorviagens.navigation.NavManager
 import com.example.appgerenciadorviagens.viewModels.LoginViewModel
 
 @Composable
@@ -65,16 +66,17 @@ fun loginView(navController: NavController) {
                 PasswordField(
                     value = loginModel.password,
                     onChange = { loginModel.password = it },
-                    label = "Senha"
+                    label = "Senha",
+                    modifier = Modifier.fillMaxWidth()
                 )
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    TextButton(onClick = { navController.navigate("forgotPassword") }) {
+                    TextButton(onClick = { navController.navigate(NavManager.ForgotPassword.route) {} }) {
                         Text(text = "Esqueci a senha")
                     }
                     Spacer(modifier = Modifier.height(8.dp))
-                    TextButton(onClick = { navController.navigate("register") }) {
+                    TextButton(onClick = { navController.navigate(NavManager.Register.route) {} }) {
                         Text(text = "Cadastrar-se")
                     }
                 }
@@ -86,7 +88,7 @@ fun loginView(navController: NavController) {
                         if (loginModel.username.equals("admin") && loginModel.password.equals("admin")) {
                             //onSuccess()
                             Toast.makeText(context, "Logado!", Toast.LENGTH_SHORT).show()
-                            navController.navigate("home")
+                            navController.navigate(NavManager.Home.route) {}
                         } else {
                             Toast.makeText(context, "Login inválido!", Toast.LENGTH_SHORT)
                                 .show()

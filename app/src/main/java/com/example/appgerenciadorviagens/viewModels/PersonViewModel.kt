@@ -13,9 +13,11 @@ import org.valiktor.functions.isEqualTo
 import org.valiktor.functions.isNotEmpty
 import org.valiktor.validate
 
-class PessoaViewModel(/*val context: Context*/) : ViewModel() {
+class PersonViewModel(/*val context: Context*/) : ViewModel() {
 
     var id by mutableStateOf("")
+
+    var name by mutableStateOf("")
 
     var username by mutableStateOf("")
 

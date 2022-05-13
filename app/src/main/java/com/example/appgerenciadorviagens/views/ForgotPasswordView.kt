@@ -1,5 +1,6 @@
 package com.example.appgerenciadorviagens.views
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.Card
@@ -11,10 +12,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.example.appgerenciadorviagens.viewModels.ForgotPasswordViewModel
 
 @Composable
-fun forgotPasswordView() {
+fun forgotPasswordView(navController: NavController) {
     val forgotModel: ForgotPasswordViewModel = viewModel()
 
     Card(
@@ -49,6 +51,7 @@ fun forgotPasswordView() {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(text = "Enviar")
+                Toast.makeText(context, "Enviado!", Toast.LENGTH_LONG).show();
             }
         }
     }
