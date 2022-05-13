@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -73,15 +72,17 @@ fun TravelView(travel: TravelViewModel) {
             }
     ) {
         Row() {
-            Column(modifier = Modifier
-                .padding(16.dp)
-                .weight(1f)
+            Column(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .weight(1f)
             ) {
                 Text(text = "Destino ${travel.destiny}")
             }
-            Column(modifier = Modifier
-                .padding(16.dp)
-                .weight(1f)
+            Column(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .weight(1f)
             ) {
                 Text(text = "Data de chegada: ${travel.arrivalDate}")
                 Text(text = "Data de partida: ${travel.departureDate}")
