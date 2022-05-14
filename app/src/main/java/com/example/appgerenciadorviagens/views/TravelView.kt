@@ -24,7 +24,7 @@ import java.text.DecimalFormat
 @Composable
 fun travelView(navController: NavController) {
 
-    val t1: TravelViewModel = viewModel()
+   /* val t1: TravelViewModel = viewModel()
     t1.id = 1
     t1.budget = 10000.00
     t1.destiny = "Dubai"
@@ -93,5 +93,5 @@ fun TravelView(travel: TravelViewModel) {
                     .padding(16.dp)
             )
         }
-    }
+    }*/
 }

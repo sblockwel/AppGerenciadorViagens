@@ -87,6 +87,7 @@ fun LoginNavigation(navController: NavHostController) {
         composable(NavManager.Register.route) { registerView(navController) }
         composable(NavManager.Home.route) { homeView(navController) }
         composable(NavManager.Travels.route) { travelView(navController) }
+        composable(NavManager.ForgotPassword.route) { forgotPasswordView(navController) }
     }
 }
 

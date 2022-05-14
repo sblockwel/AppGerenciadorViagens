@@ -63,23 +63,24 @@ fun registerView(navController: NavHostController) {
                 label = "Confirmar senha",
                 modifier = Modifier.fillMaxWidth()
             )
-        }
-        Spacer(
-            modifier = Modifier.height(16.dp)
-        )
-        Row() {
-            Button(
-                onClick = {
-                    personModel.register()
-                    navController.navigate(NavManager.Home.route) { }
-                },
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(text = "Entrar")
+            Spacer(
+                modifier = Modifier.height(16.dp)
+            )
+            Row() {
+                Button(
+                    onClick = {
+                        personModel.register()
+                        navController.navigate(NavManager.Home.route) { }
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(text = "Salvar")
+                }
+                Button(onClick = { navController.navigateUp()}) {
+                    Text(text = "Voltar")
+                }
             }
-            Button(onClick = { navController.navigateUp()}) {
-                Text(text = "Voltar")
-            }
         }
+
     }
 }

@@ -47,11 +47,12 @@ fun forgotPasswordView(navController: NavController) {
             Button(
                 onClick = {
                     forgotModel.recoverPassword()
+                    Toast.makeText(context, "Enviado!", Toast.LENGTH_LONG).show();
                 },
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(text = "Enviar")
-                Toast.makeText(context, "Enviado!", Toast.LENGTH_LONG).show();
+
             }
         }
     }
