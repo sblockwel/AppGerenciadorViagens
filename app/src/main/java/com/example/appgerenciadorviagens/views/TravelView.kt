@@ -24,21 +24,23 @@ import java.text.DecimalFormat
 @Composable
 fun travelView(navController: NavController) {
 
-   /* val t1: TravelViewModel = viewModel()
+   var t1: TravelViewModel = viewModel()
     t1.id = 1
     t1.budget = 10000.00
     t1.destiny = "Dubai"
     t1.arrivalDate = "20/12/2023"
     t1.departureDate = "10/01/2024"
     t1.type = TravelTypeEnum.LAZER
+    t1.user= "sabrina"
 
-    val t2: TravelViewModel = viewModel()
+    var t2: TravelViewModel = viewModel()
     t2.id = 1
     t2.budget = 100.00
     t2.destiny = "Holanda"
     t2.arrivalDate = "05/08/2022"
     t2.departureDate = "12/09/2022"
     t2.type = TravelTypeEnum.NEGOCIO
+    t2.user= "sabrina"
 
     val travels = listOf(
         t1,
@@ -47,13 +49,13 @@ fun travelView(navController: NavController) {
 
     LazyColumn() {
         items(items = travels) { t ->
-            TravelView(t)
+            TravelCards(t)
         }
     }
 }
 
 @Composable
-fun TravelView(travel: TravelViewModel) {
+fun TravelCards(travel: TravelViewModel) {
     val df = DecimalFormat("0.00")
     val context = LocalContext.current
     Card(
@@ -93,5 +95,5 @@ fun TravelView(travel: TravelViewModel) {
                     .padding(16.dp)
             )
         }
-    }*/
+    }
 }

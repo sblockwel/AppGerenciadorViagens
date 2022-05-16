@@ -13,13 +13,12 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.appgerenciadorviagens.componente.PasswordField
 import com.example.appgerenciadorviagens.navigation.NavHomeManager
-import com.example.appgerenciadorviagens.navigation.NavManager
-import com.example.appgerenciadorviagens.viewModels.PersonViewModel
+import com.example.appgerenciadorviagens.viewModels.TravelViewModel
 
 
 @Composable
-fun registerView(navController: NavHostController) {
-    val personModel: PersonViewModel = viewModel()
+fun travelForm(navController: NavHostController) {
+    val travelFormModel: TravelViewModel = viewModel()
     Card(
         elevation = 10.dp,
         modifier = Modifier
@@ -36,33 +35,33 @@ fun registerView(navController: NavHostController) {
         ) {
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
-                value = personModel.name,
-                onValueChange = { personModel.name = it },
-                label = { Text("Usuário") },
+                value = travelFormModel.destiny,
+                onValueChange = { travelFormModel.destiny = it },
+                label = { Text("Destino") },
             )
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
-                value = personModel.username,
-                onValueChange = { personModel.username = it },
-                label = { Text("Usuário") },
+                value = travelFormModel.type,
+                onValueChange = { travelFormModel.type = it },
+                label = { Text("Tipo") },
             )
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
-                value = personModel.email,
-                onValueChange = { personModel.email = it },
-                label = { Text("E-mail") },
+                value = travelFormModel.arrivalDate,
+                onValueChange = { travelFormModel.arrivalDate = it },
+                label = { Text("Data de chegada") },
             )
-            PasswordField(
-                value = personModel.password,
-                onChange = { personModel.password = it },
-                label = "Senha",
-                modifier = Modifier.fillMaxWidth()
+            OutlinedTextField(
+                modifier = Modifier.fillMaxWidth(),
+                value = travelFormModel.departureDate,
+                onValueChange = { travelFormModel.departureDate = it },
+                label = { Text("Data de partida") },
             )
-            PasswordField(
-                value = personModel.confirmPassword,
-                onChange = { personModel.confirmPassword = it },
-                label = "Confirmar senha",
-                modifier = Modifier.fillMaxWidth()
+            OutlinedTextField(
+                modifier = Modifier.fillMaxWidth(),
+                value = travelFormModel.budget,
+                onValueChange = { travelFormModel.budget = it },
+                label = { Text("Orçamento") },
             )
             Spacer(
                 modifier = Modifier.height(16.dp)
@@ -70,8 +69,7 @@ fun registerView(navController: NavHostController) {
             Row() {
                 Button(
                     onClick = {
-                        personModel.register()
-                        navController.navigate(NavHomeManager.Home.route) {  }
+                              
                     },
                     modifier = Modifier.fillMaxWidth()
                 ) {
