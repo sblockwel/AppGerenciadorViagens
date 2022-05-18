@@ -53,45 +53,6 @@ fun App() {
     //HomeNavigation(navController)
 }
 
-@Composable
-fun HomeNavigation(navController: NavHostController) {
-    val items = listOf(
-        NavHomeManager.Home,
-        NavHomeManager.Travels,
-        NavHomeManager.About
-    )
-    Scaffold(
-        bottomBar = {
-            BottomNavigation {
-                val navBackStackEntry by navController.currentBackStackEntryAsState()
-                val currentDestination = navBackStackEntry?.destination
-                items.forEach { screen ->
-                    BottomNavigationItem(
-                        icon = { Icon(screen.icon, contentDescription = null) },
-                        label = { Text(stringResource(screen.resourceId)) },
-                        selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
-                        onClick = {
-                            navController.navigate(screen.route) {
-
-                            }
-                        }
-                    )
-                }
-            }
-        }
-    ) { innerPadding ->
-        NavHost(
-            navController,
-            startDestination = NavHomeManager.Home.route,
-            Modifier.padding(innerPadding)
-        ) {
-            //composable(NavHomeManager.Home.route) { homeView(navController) }
-            composable(NavHomeManager.Travels.route) { travelView(navController) }
-            composable(NavHomeManager.About.route) { aboutView(navController) }
-        }
-    }
-}
-
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
