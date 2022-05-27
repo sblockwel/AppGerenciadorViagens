@@ -87,7 +87,7 @@ fun loginView(navController: NavController) {
                     onClick = {
                         if (loginModel.username.equals("admin") && loginModel.password.equals("admin")) {
                             Toast.makeText(context, "Logado!", Toast.LENGTH_SHORT).show()
-                            navController.navigate(NavManager.Home.route) { }
+                            navController.navigate(NavHomeManager.Home.route) { }
                             //HomeNavigation(navController)
                         } else {
                             Toast.makeText(context, "Login inválido!", Toast.LENGTH_SHORT)

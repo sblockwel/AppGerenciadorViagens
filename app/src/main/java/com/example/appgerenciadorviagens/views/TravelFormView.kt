@@ -1,5 +1,6 @@
 package com.example.appgerenciadorviagens.views
 
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -62,7 +63,14 @@ fun travelForm(navController: NavHostController) {
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
                 value = travelFormModel.budget.toString(),
-                onValueChange = { travelFormModel.budget = it.toDoubleOrNull()!! },
+                onValueChange = {
+                    try {
+                        travelFormModel.budget = it.toDoubleOrNull()!!
+                    }
+                    catch (e: Exception){
+                        Log.e("app", "Erro de conversão!!")
+                    }
+                },
                 label = { Text("Orçamento") },
             )
             Spacer(

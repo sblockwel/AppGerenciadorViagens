@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    //id "org.jetbrains.kotlin.kapt" //version "1.6.21"
 }
 
 android {
@@ -69,7 +70,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version"
 
     implementation "androidx.compose.material:material-icons-extended:1.1.1"
-
     def nav_version = "2.4.2"
 
     // Jetpack Compose Integration
@@ -84,5 +84,4 @@ dependencies {
 
     // optional - RxJava3 support for Room
     implementation "androidx.room:room-rxjava3:$room_version"
-
 }

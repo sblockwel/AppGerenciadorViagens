@@ -1,5 +1,6 @@
 package com.example.appgerenciadorviagens.views
 
+import android.app.Application
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.Card
@@ -8,6 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
@@ -15,11 +17,18 @@ import com.example.appgerenciadorviagens.componente.PasswordField
 import com.example.appgerenciadorviagens.navigation.NavHomeManager
 import com.example.appgerenciadorviagens.navigation.NavManager
 import com.example.appgerenciadorviagens.viewModels.PersonViewModel
+import com.example.appgerenciadorviagens.viewModels.RegisterPersonViewModelFactory
 
 
 @Composable
 fun registerView(navController: NavHostController) {
-    val personModel: PersonViewModel = viewModel()
+    
+    val context = LocalContext as Application
+    val app = context.applicationContext as Application
+
+    val personModel: PersonViewModel = viewModel(
+        factory = RegisterPersonViewModelFactory(app)
+    )
     Card(
         elevation = 10.dp,
         modifier = Modifier

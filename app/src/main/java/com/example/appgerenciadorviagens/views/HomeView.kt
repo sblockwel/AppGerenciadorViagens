@@ -21,12 +21,13 @@ import com.example.appgerenciadorviagens.navigation.NavManager
 fun homeView(navController: NavHostController) {
     Text(text = "Home")
 
-    principalNavigation(navController)
+    principalNavigation()
 }
 
 
 @Composable
-fun principalNavigation(navController: NavHostController) {
+fun principalNavigation() {
+    val navController = rememberNavController()
     val items = listOf(
         NavHomeManager.Home,
         NavHomeManager.Travels,
@@ -64,12 +65,7 @@ fun principalNavigation(navController: NavHostController) {
     }
 }
 /*
-val navController = rememberNavController()
-val items = listOf(
-    ScreenManager.Home,
-    ScreenManager.Viagens,
-    ScreenManager.Sobre
-)
+
 Scaffold(
 bottomBar = {
     androidx.compose.material.BottomNavigation(

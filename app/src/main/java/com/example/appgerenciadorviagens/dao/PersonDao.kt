@@ -1,7 +1,7 @@
 package com.example.appgerenciadorviagens.dao
 
-import android.app.Person
 import androidx.room.*
+import com.example.appgerenciadorviagens.model.Person
 
 @Dao
 interface PersonDao {
