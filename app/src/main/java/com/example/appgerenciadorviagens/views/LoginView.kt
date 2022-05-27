@@ -12,11 +12,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import com.example.appgerenciadorviagens.HomeNavigation
 import com.example.appgerenciadorviagens.R
 import com.example.appgerenciadorviagens.componente.PasswordField
 import com.example.appgerenciadorviagens.navigation.NavHomeManager
@@ -92,7 +87,7 @@ fun loginView(navController: NavController) {
                     onClick = {
                         if (loginModel.username.equals("admin") && loginModel.password.equals("admin")) {
                             Toast.makeText(context, "Logado!", Toast.LENGTH_SHORT).show()
-                            navController.navigate(NavHomeManager.Home.route) { }
+                            navController.navigate(NavManager.Home.route) { }
                             //HomeNavigation(navController)
                         } else {
                             Toast.makeText(context, "Login inválido!", Toast.LENGTH_SHORT)

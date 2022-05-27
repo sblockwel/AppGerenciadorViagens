@@ -71,7 +71,7 @@ fun registerView(navController: NavHostController) {
                 Button(
                     onClick = {
                         personModel.register()
-                        navController.navigate(NavHomeManager.Home.route) {  }
+                        navController.navigate(NavManager.Login.route) {  }
                     },
                     modifier = Modifier.fillMaxWidth()
                 ) {

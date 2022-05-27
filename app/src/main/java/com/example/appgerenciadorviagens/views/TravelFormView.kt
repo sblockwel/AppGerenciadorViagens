@@ -1,19 +1,15 @@
 package com.example.appgerenciadorviagens.views
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.Card
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.example.appgerenciadorviagens.componente.PasswordField
-import com.example.appgerenciadorviagens.navigation.NavHomeManager
 import com.example.appgerenciadorviagens.viewModels.TravelViewModel
+import com.example.appgerenciadorviagens.viewModels.enum.TravelTypeEnum
 
 
 @Composable
@@ -39,10 +35,16 @@ fun travelForm(navController: NavHostController) {
                 onValueChange = { travelFormModel.destiny = it },
                 label = { Text("Destino") },
             )
+            RadioButton(
+                selected = TravelTypeEnum.LAZER == travelFormModel.type,
+                onClick = { travelFormModel.type = TravelTypeEnum.LAZER })
+            RadioButton(
+                selected = TravelTypeEnum.NEGOCIO == travelFormModel.type,
+                onClick = { travelFormModel.type = TravelTypeEnum.NEGOCIO })
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
-                value = travelFormModel.type,
-                onValueChange = { travelFormModel.type = it },
+                value = travelFormModel.type.toString(),
+                onValueChange = { travelFormModel.type = TravelTypeEnum.valueOf(it) },
                 label = { Text("Tipo") },
             )
             OutlinedTextField(
@@ -59,8 +61,8 @@ fun travelForm(navController: NavHostController) {
             )
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
-                value = travelFormModel.budget,
-                onValueChange = { travelFormModel.budget = it },
+                value = travelFormModel.budget.toString(),
+                onValueChange = { travelFormModel.budget = it.toDoubleOrNull()!! },
                 label = { Text("Orçamento") },
             )
             Spacer(
@@ -69,13 +71,13 @@ fun travelForm(navController: NavHostController) {
             Row() {
                 Button(
                     onClick = {
-                              
+
                     },
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(text = "Salvar")
                 }
-                Button(onClick = { navController.navigateUp()}) {
+                Button(onClick = { navController.navigateUp() }) {
                     Text(text = "Voltar")
                 }
             }

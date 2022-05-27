@@ -41,16 +41,12 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun App() {
     val navController = rememberNavController()
-    NavHost(
-        navController,
-        startDestination = NavManager.Login.route
-    ) {
+    NavHost(navController, startDestination = NavManager.Login.route) {
         composable(NavManager.Login.route) { loginView(navController) }
         composable(NavManager.Register.route) { registerView(navController) }
         composable(NavManager.ForgotPassword.route) { forgotPasswordView(navController) }
-        composable(NavManager.Home.route) { homeView(navController) }
+        composable(NavHomeManager.Home.route) { principalNavigation() }
     }
-    //HomeNavigation(navController)
 }
 
 @Preview(showBackground = true)

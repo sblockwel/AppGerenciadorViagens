@@ -8,7 +8,7 @@ data class person (
     val nome: String,
     val email: String,
     val username: String,
-    val passwor: String
+    val password: String
 ){
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
