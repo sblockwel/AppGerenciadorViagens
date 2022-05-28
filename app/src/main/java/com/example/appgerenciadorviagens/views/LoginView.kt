@@ -11,7 +11,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.appgerenciadorviagens.R
 import com.example.appgerenciadorviagens.componente.PasswordField
 import com.example.appgerenciadorviagens.navigation.NavHomeManager
@@ -19,7 +19,7 @@ import com.example.appgerenciadorviagens.navigation.NavManager
 import com.example.appgerenciadorviagens.viewModels.LoginViewModel
 
 @Composable
-fun loginView(navController: NavController) {
+fun loginView(navController: NavHostController) {
     val loginModel: LoginViewModel = viewModel()
     Card(
         elevation = 10.dp,
@@ -88,7 +88,6 @@ fun loginView(navController: NavController) {
                         if (loginModel.username.equals("admin") && loginModel.password.equals("admin")) {
                             Toast.makeText(context, "Logado!", Toast.LENGTH_SHORT).show()
                             navController.navigate(NavHomeManager.Home.route) { }
-                            //HomeNavigation(navController)
                         } else {
                             Toast.makeText(context, "Login inválido!", Toast.LENGTH_SHORT)
                                 .show()

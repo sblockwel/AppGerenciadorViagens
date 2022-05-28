@@ -9,7 +9,7 @@ import com.example.appgerenciadorviagens.model.Person
 import com.example.appgerenciadorviagens.repository.PersonRepository
 import kotlinx.coroutines.launch
 
-class PersonViewModel(private val personRepository: PersonRepository) : ViewModel() {
+class PersonViewModel(/*private val personRepository: PersonRepository*/) : ViewModel() {
 
     var id by mutableStateOf("")
 
@@ -25,11 +25,11 @@ class PersonViewModel(private val personRepository: PersonRepository) : ViewMode
 
 
     fun register() {
-        val person = Person(name, username, email, password)
+        /*val person = Person(name, username, email, password)
 
         viewModelScope.launch {
             personRepository.insert(person)
-        }
+        }*/
 
         /* try {
              validate(this) {

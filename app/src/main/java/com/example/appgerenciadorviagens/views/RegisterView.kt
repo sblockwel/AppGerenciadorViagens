@@ -23,12 +23,13 @@ import com.example.appgerenciadorviagens.viewModels.RegisterPersonViewModelFacto
 @Composable
 fun registerView(navController: NavHostController) {
     
-    val context = LocalContext as Application
+    /*val context = LocalContext as Application
     val app = context.applicationContext as Application
 
     val personModel: PersonViewModel = viewModel(
         factory = RegisterPersonViewModelFactory(app)
-    )
+    )*/
+    val personModel : PersonViewModel = viewModel()
     Card(
         elevation = 10.dp,
         modifier = Modifier

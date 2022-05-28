@@ -18,10 +18,8 @@ import com.example.appgerenciadorviagens.navigation.NavHomeManager
 import com.example.appgerenciadorviagens.navigation.NavManager
 
 @Composable
-fun homeView(navController: NavHostController) {
+fun homeView() {
     Text(text = "Home")
-
-    principalNavigation()
 }
 
 
@@ -58,9 +56,9 @@ fun principalNavigation() {
             startDestination = NavHomeManager.Home.route,
             Modifier.padding(innerPadding)
         ) {
-            composable(NavHomeManager.Home.route) { homeView(navController) }
-            composable(NavHomeManager.Travels.route) { travelView(navController) }
-            composable(NavHomeManager.About.route) { aboutView(navController) }
+            composable(NavHomeManager.Home.route) { homeView() }
+            composable(NavHomeManager.Travels.route) { travelView(navController = navController) }
+            composable(NavHomeManager.About.route) { aboutView(navController = navController) }
         }
     }
 }

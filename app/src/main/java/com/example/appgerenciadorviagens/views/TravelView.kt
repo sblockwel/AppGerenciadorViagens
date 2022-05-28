@@ -17,12 +17,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.appgerenciadorviagens.viewModels.TravelViewModel
 import com.example.appgerenciadorviagens.viewModels.enum.TravelTypeEnum
 import java.text.DecimalFormat
 
 @Composable
-fun travelView(navController: NavController) {
+fun travelView(navController: NavHostController) {
 
    var t1: TravelViewModel = viewModel()
     t1.id = 1

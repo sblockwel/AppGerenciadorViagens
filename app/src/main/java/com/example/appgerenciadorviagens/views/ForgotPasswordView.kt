@@ -12,11 +12,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.appgerenciadorviagens.viewModels.ForgotPasswordViewModel
 
 @Composable
-fun forgotPasswordView(navController: NavController) {
+fun forgotPasswordView(navController: NavHostController) {
     val forgotModel: ForgotPasswordViewModel = viewModel()
 
     Card(

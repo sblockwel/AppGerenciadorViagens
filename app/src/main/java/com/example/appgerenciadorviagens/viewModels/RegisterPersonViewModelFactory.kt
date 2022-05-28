@@ -9,7 +9,7 @@ class RegisterPersonViewModelFactory(val app: Application): ViewModelProvider.Fa
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
 
         val repository = PersonRepository(app)
-        val model = PersonViewModel(repository)
+        val model = PersonViewModel(/*repository*/)
         return model as T
     }
 

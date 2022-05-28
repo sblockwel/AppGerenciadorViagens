@@ -4,23 +4,21 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavDestination.Companion.hierarchy
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.appgerenciadorviagens.navigation.NavHomeManager
 import com.example.appgerenciadorviagens.navigation.NavManager
 import com.example.appgerenciadorviagens.ui.theme.AppGerenciadorViagensTheme
-import com.example.appgerenciadorviagens.views.*
+import com.example.appgerenciadorviagens.views.forgotPasswordView
+import com.example.appgerenciadorviagens.views.loginView
+import com.example.appgerenciadorviagens.views.principalNavigation
+import com.example.appgerenciadorviagens.views.registerView
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,10 +39,10 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun App() {
     val navController = rememberNavController()
-    NavHost(navController, startDestination = NavManager.Login.route) {
-        composable(NavManager.Login.route) { loginView(navController) }
-        composable(NavManager.Register.route) { registerView(navController) }
-        composable(NavManager.ForgotPassword.route) { forgotPasswordView(navController) }
+    NavHost(navController = navController, startDestination = NavManager.Login.route) {
+        composable(NavManager.Login.route) { loginView(navController = navController) }
+        composable(NavManager.Register.route) { registerView(navController = navController) }
+        composable(NavManager.ForgotPassword.route) { forgotPasswordView(navController = navController) }
         composable(NavHomeManager.Home.route) { principalNavigation() }
     }
 }

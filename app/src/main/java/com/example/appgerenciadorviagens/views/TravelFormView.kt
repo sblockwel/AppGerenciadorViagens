@@ -66,8 +66,7 @@ fun travelForm(navController: NavHostController) {
                 onValueChange = {
                     try {
                         travelFormModel.budget = it.toDoubleOrNull()!!
-                    }
-                    catch (e: Exception){
+                    } catch (e: Exception) {
                         Log.e("app", "Erro de conversão!!")
                     }
                 },
