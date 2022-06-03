@@ -22,14 +22,13 @@ import com.example.appgerenciadorviagens.viewModels.RegisterPersonViewModelFacto
 
 @Composable
 fun registerView(navController: NavHostController) {
-    
-    /*val context = LocalContext as Application
+    val context = LocalContext.current
     val app = context.applicationContext as Application
 
     val personModel: PersonViewModel = viewModel(
         factory = RegisterPersonViewModelFactory(app)
-    )*/
-    val personModel : PersonViewModel = viewModel()
+    )
+
     Card(
         elevation = 10.dp,
         modifier = Modifier
@@ -48,7 +47,7 @@ fun registerView(navController: NavHostController) {
                 modifier = Modifier.fillMaxWidth(),
                 value = personModel.name,
                 onValueChange = { personModel.name = it },
-                label = { Text("Usuário") },
+                label = { Text("Nome") },
             )
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),

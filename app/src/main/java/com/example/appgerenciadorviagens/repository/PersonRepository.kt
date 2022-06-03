@@ -7,10 +7,10 @@ import com.example.appgerenciadorviagens.model.Person
 
 class PersonRepository(app: Application) {
 
-    private val personDao: PersonDao = TODO()
+    private val personDao: PersonDao
 
     init {
-        AppDatabaseConnection.getDB(app)
+        personDao = AppDatabaseConnection.getDB(app).personDao()
     }
 
     suspend fun insert(person: Person) {

@@ -14,9 +14,9 @@ interface PersonDao {
     @Delete
     suspend fun delete(person: Person)
 
-    @Query("select * from Person order by nome")
+    @Query("select * from Person p order by p.name")
     suspend fun findAll(): List<Person>
 
-    @Query("select * from Person c where c.id = :id")
+    @Query("select * from Person p where p.id = :id")
     suspend fun findById(id: Int): Person?
 }
