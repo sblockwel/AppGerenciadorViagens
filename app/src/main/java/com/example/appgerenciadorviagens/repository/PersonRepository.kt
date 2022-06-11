@@ -16,13 +16,12 @@ class PersonRepository(app: Application) {
     suspend fun insert(person: Person) {
         if (person.id == 0) {
             personDao.insert(person)
-        }
-        else{
+        } else {
             personDao.update(person)
         }
     }
 
-    suspend fun findAll() : List<Person> = personDao.findAll()
+    suspend fun findAll(): List<Person> = personDao.findAll()
 
     suspend fun findById(id: Int) = personDao.findById(id)
 

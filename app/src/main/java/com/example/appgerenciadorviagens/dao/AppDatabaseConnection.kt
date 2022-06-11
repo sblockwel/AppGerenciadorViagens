@@ -1,15 +1,17 @@
 package com.example.appgerenciadorviagens.dao
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room.*
+import com.example.appgerenciadorviagens.componente.LocalDateConverter
 import com.example.appgerenciadorviagens.model.Person
+import com.example.appgerenciadorviagens.model.Travel
 
-@Database(entities = arrayOf(Person::class), version = 1 )
+@Database(entities = arrayOf(Person::class, Travel::class), version = 1 )
+@TypeConverters(LocalDateConverter::class)
 abstract class AppDatabaseConnection: RoomDatabase() {
 
     abstract fun personDao(): PersonDao
+    abstract fun travelDao(): TravelDao
 
     // Desing Pattern - Singleton
     companion object {

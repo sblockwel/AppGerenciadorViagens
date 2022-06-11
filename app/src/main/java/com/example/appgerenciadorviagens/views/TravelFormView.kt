@@ -1,21 +1,31 @@
 package com.example.appgerenciadorviagens.views
 
+import android.app.Application
 import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.example.appgerenciadorviagens.componente.LocalDateConverter
+import com.example.appgerenciadorviagens.viewModels.RegisterTravelViewModelFactory
 import com.example.appgerenciadorviagens.viewModels.TravelViewModel
 import com.example.appgerenciadorviagens.viewModels.enum.TravelTypeEnum
 
 
 @Composable
 fun travelForm(navController: NavHostController) {
-    val travelFormModel: TravelViewModel = viewModel()
+    val context = LocalContext.current
+    val app = context.applicationContext as Application
+
+    val travelFormModel: TravelViewModel = viewModel(
+        factory = RegisterTravelViewModelFactory(app)
+    )
+
     Card(
         elevation = 10.dp,
         modifier = Modifier
@@ -50,14 +60,26 @@ fun travelForm(navController: NavHostController) {
             )
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
-                value = travelFormModel.arrivalDate,
-                onValueChange = { travelFormModel.arrivalDate = it },
+                value = travelFormModel.arrivalDate.toString(),
+                onValueChange = {
+                    try {
+                        travelFormModel.arrivalDate = it
+                    } catch (e: Exception) {
+                        Log.e("app", "Erro de conversão!!")
+                    }
+                },
                 label = { Text("Data de chegada") },
             )
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
-                value = travelFormModel.departureDate,
-                onValueChange = { travelFormModel.departureDate = it },
+                value = travelFormModel.departureDate.toString(),
+                onValueChange = {
+                    try {
+                        travelFormModel.departureDate = it.toLong()
+                    } catch (e: Exception) {
+                        Log.e("app", "Erro de conversão!!")
+                    }
+                },
                 label = { Text("Data de partida") },
             )
             OutlinedTextField(
