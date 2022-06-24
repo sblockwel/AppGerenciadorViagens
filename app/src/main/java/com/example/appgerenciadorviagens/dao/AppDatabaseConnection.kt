@@ -4,16 +4,17 @@ import android.content.Context
 import androidx.room.*
 import com.example.appgerenciadorviagens.componente.LocalDateConverter
 import com.example.appgerenciadorviagens.model.Person
+import com.example.appgerenciadorviagens.model.Spent
 import com.example.appgerenciadorviagens.model.Travel
 
-@Database(entities = arrayOf(Person::class, Travel::class), version = 1 )
+@Database(entities = arrayOf(Person::class, Travel::class, Spent::class), version = 1 )
 @TypeConverters(LocalDateConverter::class)
 abstract class AppDatabaseConnection: RoomDatabase() {
 
     abstract fun personDao(): PersonDao
     abstract fun travelDao(): TravelDao
+    abstract fun spentDao(): SpentDao
 
-    // Desing Pattern - Singleton
     companion object {
         var connection: AppDatabaseConnection? = null
 
@@ -23,7 +24,6 @@ abstract class AppDatabaseConnection: RoomDatabase() {
                 return temp
             }
             else {
-                // conectar o banco
                 val instance = Room.databaseBuilder(
                     context,
                     AppDatabaseConnection::class.java,

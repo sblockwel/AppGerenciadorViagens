@@ -25,7 +25,7 @@ class TravelViewModel(private val travelRepository: TravelRepository) : ViewMode
 
     var budget by mutableStateOf(0.00)
 
-    var user by mutableStateOf("")
+    var user by mutableStateOf(-1)
 
     fun register() {
 
