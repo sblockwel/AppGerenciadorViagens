@@ -1,4 +1,4 @@
-package com.example.appgerenciadorviagens.componente
+package com.example.appgerenciadorviagens.utils
 
 import androidx.room.TypeConverter
 import java.time.LocalDate

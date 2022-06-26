@@ -17,7 +17,7 @@ class TravelViewModel(private val travelRepository: TravelRepository) : ViewMode
 
     var destiny by mutableStateOf("")
 
-    var type by mutableStateOf(TravelTypeEnum.LAZER)
+    var type by mutableStateOf(TravelTypeEnum.NONE)
 
     var arrivalDate by mutableStateOf(LocalDate.now())
 

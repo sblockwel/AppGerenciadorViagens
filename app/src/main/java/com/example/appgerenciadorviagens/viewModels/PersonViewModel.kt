@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 class PersonViewModel(private val personRepository: PersonRepository) : ViewModel() {
 
-    var id by mutableStateOf("")
+    var id by mutableStateOf(-1)
 
     var name by mutableStateOf("")
 

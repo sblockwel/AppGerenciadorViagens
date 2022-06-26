@@ -15,7 +15,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.example.appgerenciadorviagens.componente.LocalDateConverter
+import com.example.appgerenciadorviagens.componente.datePicker
+import com.example.appgerenciadorviagens.utils.LocalDateConverter
 import com.example.appgerenciadorviagens.viewModels.RegisterTravelViewModelFactory
 import com.example.appgerenciadorviagens.viewModels.TravelViewModel
 import com.example.appgerenciadorviagens.viewModels.enum.TravelTypeEnum
@@ -52,61 +53,19 @@ fun travelForm(navController: NavHostController) {
                 label = { Text("Destino") },
             )
             RadioButton(
-                selected = TravelTypeEnum.LAZER == travelFormModel.type,
-                onClick = { travelFormModel.type = TravelTypeEnum.LAZER })
+                selected = TravelTypeEnum.LEISURE == travelFormModel.type,
+                onClick = { travelFormModel.type = TravelTypeEnum.LEISURE })
             RadioButton(
-                selected = TravelTypeEnum.NEGOCIO == travelFormModel.type,
-                onClick = { travelFormModel.type = TravelTypeEnum.NEGOCIO })
+                selected = TravelTypeEnum.BUSINESS == travelFormModel.type,
+                onClick = { travelFormModel.type = TravelTypeEnum.BUSINESS })
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
                 value = travelFormModel.type.toString(),
                 onValueChange = { travelFormModel.type = TravelTypeEnum.valueOf(it) },
                 label = { Text("Tipo") },
             )
-            /*OutlinedTextField(
-                modifier = Modifier.fillMaxWidth(),
-                value = travelFormModel.arrivalDate.toString(),
-                onValueChange = {
-                    try {
-                        travelFormModel.arrivalDate = LocalDateConverter.dateToLong(it)
-                    } catch (e: Exception) {
-                        Log.e("app", "Erro de conversão!!")
-                    }
-                },
-                label = { Text("Data de chegada") },
-            )*/
-            val mYear: Int
-            val mMonth: Int
-            val mDay: Int
-
-            val mCalendar = Calendar.getInstance()
-
-            mYear = mCalendar.get(Calendar.YEAR)
-            mMonth = mCalendar.get(Calendar.MONTH)
-            mDay = mCalendar.get(Calendar.DAY_OF_MONTH)
-
-            mCalendar.time = Date()
-
-            val mDate = remember { mutableStateOf("") }
-
-            val mDatePickerDialog = DatePickerDialog(
-                context,
-                { _: DatePicker, mYear: Int, mMonth: Int, mDayOfMonth: Int ->
-                    mDate.value = "$mDayOfMonth/${mMonth+1}/$mYear"
-                }, mYear, mMonth, mDay
-            )
-            /*OutlinedTextField(
-                modifier = Modifier.fillMaxWidth(),
-                value = travelFormModel.departureDate.toString(),
-                onValueChange = {
-                    try {
-                        travelFormModel.departureDate = it
-                    } catch (e: Exception) {
-                        Log.e("app", "Erro de conversão!!")
-                    }
-                },
-                label = { Text("Data de partida") },
-            )*/
+            travelFormModel.departureDate = datePicker("Data de partida", travelFormModel.departureDate)
+            travelFormModel.arrivalDate = datePicker("Data de chegada", travelFormModel.arrivalDate )
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
                 value = travelFormModel.budget.toString(),
