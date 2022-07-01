@@ -21,9 +21,9 @@ class TravelRepository(app: Application) {
         }
     }
 
-    suspend fun findAll(): List<Travel> = travelDao.findAll()
+    /*suspend fun findAll(): List<Travel> = travelDao.findAll()
 
-    suspend fun findById(id: Int) = travelDao.findById(id)
+    suspend fun findById(id: Int) = travelDao.findById(id)*/
 
     suspend fun delete(travel: Travel) = travelDao.delete(travel)
 

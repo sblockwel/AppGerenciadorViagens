@@ -1,4 +1,4 @@
-package com.example.appgerenciadorviagens.viewModels.enum
+package com.example.appgerenciadorviagens.viewModels.enumerator
 
 enum class TravelTypeEnum(val value: Int) {
     NONE(-1),

@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.appgerenciadorviagens.model.Travel
 import com.example.appgerenciadorviagens.repository.TravelRepository
-import com.example.appgerenciadorviagens.viewModels.enum.TravelTypeEnum
+import com.example.appgerenciadorviagens.viewModels.enumerator.TravelTypeEnum
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 

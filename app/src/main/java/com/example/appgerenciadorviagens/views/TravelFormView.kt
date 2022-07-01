@@ -1,14 +1,10 @@
 package com.example.appgerenciadorviagens.views
 
 import android.app.Application
-import android.app.DatePickerDialog
 import android.util.Log
-import android.widget.DatePicker
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -16,11 +12,9 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.appgerenciadorviagens.componente.datePicker
-import com.example.appgerenciadorviagens.utils.LocalDateConverter
 import com.example.appgerenciadorviagens.viewModels.RegisterTravelViewModelFactory
 import com.example.appgerenciadorviagens.viewModels.TravelViewModel
-import com.example.appgerenciadorviagens.viewModels.enum.TravelTypeEnum
-import java.util.*
+import com.example.appgerenciadorviagens.viewModels.enumerator.TravelTypeEnum
 
 
 @Composable
