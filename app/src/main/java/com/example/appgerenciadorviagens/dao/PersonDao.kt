@@ -19,4 +19,7 @@ interface PersonDao {
 
     @Query("select * from Person p where p.id = :id")
     suspend fun findById(id: Int): Person?
+
+    @Query("select * from Person p where p.username = :username and p.password = :password")
+    suspend fun login(username: String, password: String): Person?
 }

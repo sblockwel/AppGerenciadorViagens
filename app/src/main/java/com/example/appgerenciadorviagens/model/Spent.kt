@@ -1,8 +1,6 @@
 package com.example.appgerenciadorviagens.model
 
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
+import androidx.room.*
 import java.time.LocalDate
 
 @Entity(foreignKeys = [

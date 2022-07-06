@@ -62,7 +62,6 @@ fun datePicker(label: String, dateModel: LocalDate): LocalDate? {
     if (!dateModel.equals(newDate.value) && !newDate.value.equals("")) {
         mDate = newDate
     }
-    return LocalDateTime.ofInstant(mCalendar.toInstant(), mCalendar.getTimeZone().toZoneId())
-        .toLocalDate();
+    return LocalDate.of(mYear, mMonth, mDay)
 }
 

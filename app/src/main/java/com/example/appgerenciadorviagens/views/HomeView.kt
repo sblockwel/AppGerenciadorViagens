@@ -24,7 +24,7 @@ fun homeView() {
 
 
 @Composable
-fun principalNavigation() {
+fun principalNavigation(nameUserLogged: String, idUserLogged: Int) {
     val navController = rememberNavController()
     val items = listOf(
         NavHomeManager.Home,
@@ -57,7 +57,7 @@ fun principalNavigation() {
             Modifier.padding(innerPadding)
         ) {
             composable(NavHomeManager.Home.route) { homeView() }
-            composable(NavHomeManager.Travels.route) { travelView(navController = navController) }
+            composable(NavHomeManager.Travels.route) { travelView(navController = navController, idUserLogged) }
             composable(NavHomeManager.About.route) { aboutView(navController = navController) }
         }
     }

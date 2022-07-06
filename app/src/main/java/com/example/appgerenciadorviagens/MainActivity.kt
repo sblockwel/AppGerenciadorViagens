@@ -9,8 +9,10 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
 import com.example.appgerenciadorviagens.navigation.NavHomeManager
 import com.example.appgerenciadorviagens.navigation.NavManager
@@ -43,7 +45,23 @@ fun App() {
         composable(NavManager.Login.route) { loginView(navController = navController) }
         composable(NavManager.Register.route) { registerView(navController = navController) }
         composable(NavManager.ForgotPassword.route) { forgotPasswordView(navController = navController) }
-        composable(NavHomeManager.Home.route) { principalNavigation() }
+        composable("home/{username}/{userId}",
+            arguments = listOf(
+                navArgument("username") {
+                    type = NavType.StringType
+                },
+                navArgument("userId") {
+                    type = NavType.IntType
+                }
+            )
+
+        ) {
+            val username = it.arguments?.getString("username")
+            val userId = it.arguments?.getInt("userId")
+            if (username != null && userId != null) {
+                principalNavigation(username, userId)
+            }
+        }
     }
 }
 

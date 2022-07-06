@@ -14,12 +14,12 @@ import java.time.LocalDate
         childColumns = ["userId"],
         onDelete = CASCADE)])
 data class Travel(
-    var destiny: String,
-    var type: TravelTypeEnum,
-    var arrivalDate: LocalDate?,
-    var departureDate: LocalDate?,
-    var budget: Double,
-    var userId: Int
+    val destiny: String,
+    val type: TravelTypeEnum,
+    val arrivalDate: LocalDate?,
+    val departureDate: LocalDate?,
+    val budget: Double,
+    val userId: Int
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0

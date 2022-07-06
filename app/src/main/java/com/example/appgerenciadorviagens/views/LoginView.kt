@@ -1,5 +1,6 @@
 package com.example.appgerenciadorviagens.views
 
+import android.app.Application
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -17,6 +18,8 @@ import com.example.appgerenciadorviagens.componente.PasswordField
 import com.example.appgerenciadorviagens.navigation.NavHomeManager
 import com.example.appgerenciadorviagens.navigation.NavManager
 import com.example.appgerenciadorviagens.viewModels.LoginViewModel
+import com.example.appgerenciadorviagens.viewModels.PersonViewModel
+import com.example.appgerenciadorviagens.viewModels.RegisterPersonViewModelFactory
 
 @Composable
 fun loginView(navController: NavHostController) {
@@ -36,6 +39,11 @@ fun loginView(navController: NavHostController) {
                 .fillMaxSize()
         ) {
             val context = LocalContext.current
+            val app = context.applicationContext as Application
+            val personModel:
+                    PersonViewModel = viewModel(
+                factory = RegisterPersonViewModelFactory(app)
+            )
 
             Image(
                 painter = painterResource(id = R.drawable.travelicon),

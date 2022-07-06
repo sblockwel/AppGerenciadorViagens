@@ -1,6 +1,7 @@
 package com.example.appgerenciadorviagens.repository
 
 import android.app.Application
+import androidx.lifecycle.LiveData
 import com.example.appgerenciadorviagens.dao.AppDatabaseConnection
 import com.example.appgerenciadorviagens.dao.TravelDao
 import com.example.appgerenciadorviagens.model.Travel
@@ -21,10 +22,14 @@ class TravelRepository(app: Application) {
         }
     }
 
-    /*suspend fun findAll(): List<Travel> = travelDao.findAll()
+    fun getTravelsByUser(userId: Int): LiveData<List<Travel>> = travelDao.getTravelsByUser(userId)
 
-    suspend fun findById(id: Int) = travelDao.findById(id)*/
+    suspend fun findById(id: Int) = travelDao.findById(id)
 
     suspend fun delete(travel: Travel) = travelDao.delete(travel)
+
+    fun sumSpentsByTravel(idTravel: Int): LiveData<Double> {
+        return travelDao.sumSpentsByTravel(idTravel)
+    }
 
 }

@@ -8,7 +8,7 @@ import com.example.appgerenciadorviagens.model.Person
 import com.example.appgerenciadorviagens.model.Spent
 import com.example.appgerenciadorviagens.model.Travel
 
-@Database(entities = arrayOf(Person::class, Travel::class, Spent::class, Category::class), version = 1 )
+@Database(entities = arrayOf(Person::class, Travel::class, Spent::class, Category::class), version = 2 )
 @TypeConverters(LocalDateConverter::class)
 abstract class AppDatabaseConnection: RoomDatabase() {
 
@@ -29,7 +29,7 @@ abstract class AppDatabaseConnection: RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context,
                     AppDatabaseConnection::class.java,
-                    "meu-database"
+                    "dbGerenciadorViagens"
                 ).build()
                 connection = instance
                 return instance

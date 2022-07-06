@@ -1,8 +1,10 @@
 package com.example.appgerenciadorviagens.viewModels
 
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.appgerenciadorviagens.model.Travel
@@ -25,10 +27,9 @@ class TravelViewModel(private val travelRepository: TravelRepository) : ViewMode
 
     var budget by mutableStateOf(0.00)
 
-    var user by mutableStateOf(-1)
+    var user by mutableStateOf(0)
 
     fun register() {
-
         val travel = Travel(destiny, type, arrivalDate, departureDate, budget, user)
         viewModelScope.launch {
             travelRepository.insert(travel)
@@ -52,5 +53,31 @@ class TravelViewModel(private val travelRepository: TravelRepository) : ViewMode
                  Toast.makeText(context, "${violation.property}: ${violation.constraint.name}", Toast.LENGTH_SHORT)
              }
          }*/
+    }
+
+    fun getTravelsByUser(userId: Int): LiveData<List<Travel>> {
+        return travelRepository.getTravelsByUser(userId)
+    }
+
+    fun findById(id: Int) {
+        viewModelScope.launch {
+            val t = travelRepository.findById(id)
+            if (t != null) {
+                destiny = t.destiny
+            }
+            if (t != null) {
+                departureDate = t.departureDate
+            }
+            if (t != null) {
+                arrivalDate = t.arrivalDate
+            }
+            if (t != null) {
+                budget = t.budget
+            }
+        }
+    }
+
+    fun sumSpentsByTravel(idViagem: Int): LiveData<Double> {
+        return travelRepository.sumSpentsByTravel(idViagem)
     }
 }
