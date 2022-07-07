@@ -21,7 +21,8 @@ data class Spent (
     val description: String,
     val local: String,
     val travelId: Int,
-    val categoryId: Int
+    val categoryId: Int,
+    val category: Category
 ){
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0

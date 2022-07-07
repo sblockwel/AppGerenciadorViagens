@@ -14,6 +14,8 @@ import java.time.LocalDate
         childColumns = ["userId"],
         onDelete = CASCADE)])
 data class Travel(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
     val destiny: String,
     val type: TravelTypeEnum,
     val arrivalDate: LocalDate?,
@@ -21,6 +23,5 @@ data class Travel(
     val budget: Double,
     val userId: Int
 ) {
-    @PrimaryKey(autoGenerate = true)
-    var id: Int = 0
+
 }

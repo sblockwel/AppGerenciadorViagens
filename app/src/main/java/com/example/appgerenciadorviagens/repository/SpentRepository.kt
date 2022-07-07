@@ -1,8 +1,10 @@
 package com.example.appgerenciadorviagens.repository
 
 import android.app.Application
+import androidx.lifecycle.LiveData
 import com.example.appgerenciadorviagens.dao.AppDatabaseConnection
 import com.example.appgerenciadorviagens.dao.SpentDao
+import com.example.appgerenciadorviagens.model.Category
 import com.example.appgerenciadorviagens.model.Spent
 
 class SpentRepository(app: Application) {
@@ -26,4 +28,13 @@ class SpentRepository(app: Application) {
     suspend fun findById(id: Int) = spentDao.findById(id)
 
     suspend fun delete(spent: Spent) = spentDao.delete(spent)
+
+    suspend fun deleteByID(id : Int) {
+        spentDao.deleteById(id)
+    }
+
+    fun allSpentsByTravel(viagemID: Int): LiveData<List<Spent>> {
+        return spentDao.allDespesasByViagem(viagemID)
+    }
+
 }

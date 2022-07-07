@@ -28,6 +28,8 @@ class TravelRepository(app: Application) {
 
     suspend fun delete(travel: Travel) = travelDao.delete(travel)
 
+    suspend fun deleteById(id: Int) = travelDao.deleteById(id)
+
     fun sumSpentsByTravel(idTravel: Int): LiveData<Double> {
         return travelDao.sumSpentsByTravel(idTravel)
     }

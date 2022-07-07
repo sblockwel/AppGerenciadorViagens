@@ -37,9 +37,9 @@ fun datePicker(label: String, dateModel: LocalDate): LocalDate? {
 
     val mDatePickerDialog = DatePickerDialog(
         context,
-        { _: DatePicker, mYear: Int, mMonth: Int, mDayOfMonth: Int ->
-            mDate.value = "$mDayOfMonth/${mMonth + 1}/$mYear"
-            newDate.value = "$mDayOfMonth/${mMonth + 1}/$mYear"
+        { _: DatePicker, mYear: Int, mMonth: Int, mDay: Int ->
+            mDate.value = "$mDay/${mMonth + 1}/$mYear"
+            newDate.value = "$mDay/${mMonth + 1}/$mYear"
         }, mYear, mMonth, mDay
     )
     mCalendar.set(mYear, mMonth, mDay)

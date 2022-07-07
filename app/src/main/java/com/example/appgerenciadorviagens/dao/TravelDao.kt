@@ -15,6 +15,8 @@ interface TravelDao {
     @Delete
     suspend fun delete(travel: Travel)
 
+    @Query("delete from Travel where id = :id")
+    suspend fun deleteById(id: Int)
     /*
     @Query("select * from Travel t order by t.destiny")
     suspend fun findAll(): List<Travel>

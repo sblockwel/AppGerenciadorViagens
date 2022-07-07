@@ -47,9 +47,9 @@ fun travelListView(navController: NavHostController, idUserLogged: Int) {
         items(items = travels) { t ->
             val custoViagem by travelModel.sumSpentsByTravel(t.id).observeAsState(initial = 0.00)
             if (custoViagem > 0) {
-                TravelCards(navController, t, custoViagem)
+                TravelCards(navController, t, custoViagem, idUserLogged)
             } else {
-                TravelCards(navController, t, 0.00)
+                TravelCards(navController, t, 0.00, idUserLogged)
             }
         }
     }
@@ -83,7 +83,8 @@ fun travelCompose(navController: NavHostController, idUserLogged: Int) {
 fun TravelCards(
     navController: NavHostController,
     travel: Travel,
-    budgetB: Double
+    budgetB: Double,
+    idUserLogged: Int
 ) {
     val df = DecimalFormat("0.00")
     val context = LocalContext.current
@@ -101,7 +102,7 @@ fun TravelCards(
                         Toast.LENGTH_SHORT
                     )
                     .show()
-                navController.navigate(NavHomeManager.RegisterTravel.route + "/" + travel.id)
+                navController.navigate(NavHomeManager.RegisterTravel.route + "/" + travel.id + "/" + idUserLogged)
             }
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -156,17 +157,15 @@ fun TravelCards(
                     )
                 }
             }
-
-
         }
     }
 }
 
-/*
+
 fun NavGraphBuilder.formTravelGrap(navController: NavHostController, idUserLogged: Int) {
     navigation(startDestination = "principal", route = "viagens") {
         composable("principal") { travelCompose(navController, idUserLogged) }
-        composable("form/{travelId}/{UserId}",
+        composable("registerTravel/{travelId}/{UserId}",
             arguments = listOf(
                 navArgument("travelId") {
                     type = NavType.IntType
@@ -182,23 +181,5 @@ fun NavGraphBuilder.formTravelGrap(navController: NavHostController, idUserLogge
                 travelForm(navController, id, idUser)
             }
         }
-        composable("spent/{travelId}/{detinyTravel}",
-            arguments = listOf(
-                navArgument("viagemID") {
-                    type = NavType.IntType
-                },
-                navArgument("destinoViagem") {
-                    type = NavType.StringType
-                }
-            )
-        ) {
-            val id = it.arguments?.getInt("viagemID")
-            val destino = it.arguments?.getString("destinoViagem")
-            if (id != null) {
-                if (destino != null) {
-                    DespesasCompose(navController, id, destino)
-                }
-            }
-        }
     }
-}*/
+}

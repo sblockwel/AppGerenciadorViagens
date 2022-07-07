@@ -59,7 +59,8 @@ fun principalNavigation(nameUserLogged: String, idUserLogged: Int) {
             composable(NavHomeManager.Home.route) { homeView() }
             composable(NavHomeManager.Travels.route) { travelCompose(navController = navController, idUserLogged) }
             composable(NavHomeManager.About.route) { aboutView(navController = navController) }
-            composable(NavHomeManager.RegisterTravel.route) { travelForm(navController, id, idUserLogged) }
+            formTravelGrap(navController, idUserLogged)
+            formDespesaGrap(navController, idUserLogged)
         }
     }
 }

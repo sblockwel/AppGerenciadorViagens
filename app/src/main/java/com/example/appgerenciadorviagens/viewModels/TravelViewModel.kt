@@ -1,6 +1,5 @@
 package com.example.appgerenciadorviagens.viewModels
 
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -30,7 +29,7 @@ class TravelViewModel(private val travelRepository: TravelRepository) : ViewMode
     var user by mutableStateOf(0)
 
     fun register() {
-        val travel = Travel(destiny, type, arrivalDate, departureDate, budget, user)
+        val travel = Travel(id, destiny, type, arrivalDate, departureDate, budget, user)
         viewModelScope.launch {
             travelRepository.insert(travel)
         }
@@ -45,14 +44,8 @@ class TravelViewModel(private val travelRepository: TravelRepository) : ViewMode
             val t = travelRepository.findById(id)
             if (t != null) {
                 destiny = t.destiny
-            }
-            if (t != null) {
                 departureDate = t.departureDate
-            }
-            if (t != null) {
                 arrivalDate = t.arrivalDate
-            }
-            if (t != null) {
                 budget = t.budget
             }
         }
@@ -60,5 +53,15 @@ class TravelViewModel(private val travelRepository: TravelRepository) : ViewMode
 
     fun sumSpentsByTravel(idViagem: Int): LiveData<Double> {
         return travelRepository.sumSpentsByTravel(idViagem)
+    }
+
+    fun deleteById(id: Int) {
+        viewModelScope.launch { travelRepository.deleteById(id) }
+    }
+
+    fun delete(travel: Travel) {
+        viewModelScope.launch {
+            travelRepository.delete(travel)
+        }
     }
 }

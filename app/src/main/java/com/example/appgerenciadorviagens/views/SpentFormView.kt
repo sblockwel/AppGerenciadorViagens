@@ -17,15 +17,13 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.appgerenciadorviagens.componente.datePicker
-import com.example.appgerenciadorviagens.model.Travel
 import com.example.appgerenciadorviagens.navigation.NavHomeManager
 import com.example.appgerenciadorviagens.viewModels.RegisterTravelViewModelFactory
 import com.example.appgerenciadorviagens.viewModels.TravelViewModel
 import com.example.appgerenciadorviagens.viewModels.enumerator.TravelTypeEnum
 
-
 @Composable
-fun travelForm(navController: NavHostController, id: Int?, idUserLogged: Int) {
+fun SpentForm(navController: NavHostController, idTravel: Int?, idSpent: Int) {
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
@@ -43,9 +41,9 @@ fun travelForm(navController: NavHostController, id: Int?, idUserLogged: Int) {
         factory = RegisterTravelViewModelFactory(app)
     )
 
-    if (id != null && id > 0) {
-        travelFormModel.id = id
-        travelFormModel.findById(id)
+    if (idSpent != null && idSpent > 0) {
+        travelFormModel.id = idSpent
+        travelFormModel.findById(idSpent)
     }
     Card(
         elevation = 10.dp,
@@ -61,6 +59,32 @@ fun travelForm(navController: NavHostController, id: Int?, idUserLogged: Int) {
                 .padding(all = 15.dp)
                 .fillMaxSize()
         ) {
+            ExposedDropdownMenuBox(expanded = exp, onExpandedChange = { exp = !exp }) {
+                TextField(
+                    value = selectedOption,
+//                    modifier = Modifier
+//                        .fillMaxWidth(),
+                    onValueChange = { selectedOption = it },
+                    label = { Text("Selecione ou digite a categoria") },
+                    trailingIcon = {
+                        ExposedDropdownMenuDefaults.TrailingIcon(expanded = exp)
+                    },
+                    colors = ExposedDropdownMenuDefaults.textFieldColors()
+                )
+                ExposedDropdownMenu(expanded = exp, onDismissRequest = { exp = false }) {
+                    categorias.forEach { option ->
+                        DropdownMenuItem(
+                            onClick = {
+                                selectedOption = option.nome
+                                selectedCategoriaID = option.id
+                                exp = false
+                            }
+                        ) {
+                            Text(text = option.nome)
+                        }
+                    }
+                }
+            }
             if (id != null && id > 0) {
                 Text(text = "Editar viagem")
             } else {
@@ -142,7 +166,7 @@ fun travelForm(navController: NavHostController, id: Int?, idUserLogged: Int) {
                 }
                 Spacer(modifier = Modifier.height(16.dp))
                 Button(onClick = {
-                    }
+                }
                 ) {
                     if (id != null) {
                         travelFormModel.deleteById(id)
