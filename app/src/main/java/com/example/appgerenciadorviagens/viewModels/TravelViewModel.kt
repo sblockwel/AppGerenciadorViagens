@@ -34,25 +34,6 @@ class TravelViewModel(private val travelRepository: TravelRepository) : ViewMode
         viewModelScope.launch {
             travelRepository.insert(travel)
         }
-        /*val person = Person(name, username, email, password)
-
-        viewModelScope.launch {
-            personRepository.insert(person)
-        }*/
-
-        /* try {
-             validate(this) {
-                 validate(PessoaViewModel::username).isNotEmpty().hasSize(4, 12)
-                 validate(PessoaViewModel::email).isEmail()
-                 validate(PessoaViewModel::password).isNotEmpty().hasSize(6, 10)
-                 validate(PessoaViewModel::confirmPassword).isNotEmpty().hasSize(6, 10)
-                     .isEqualTo(password)
-             }
-         } catch (ex: ConstraintViolationException) {
-             for (violation in ex.constraintViolations){
-                 Toast.makeText(context, "${violation.property}: ${violation.constraint.name}", Toast.LENGTH_SHORT)
-             }
-         }*/
     }
 
     fun getTravelsByUser(userId: Int): LiveData<List<Travel>> {

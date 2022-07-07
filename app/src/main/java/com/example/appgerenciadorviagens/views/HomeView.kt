@@ -57,8 +57,9 @@ fun principalNavigation(nameUserLogged: String, idUserLogged: Int) {
             Modifier.padding(innerPadding)
         ) {
             composable(NavHomeManager.Home.route) { homeView() }
-            composable(NavHomeManager.Travels.route) { travelView(navController = navController, idUserLogged) }
+            composable(NavHomeManager.Travels.route) { travelCompose(navController = navController, idUserLogged) }
             composable(NavHomeManager.About.route) { aboutView(navController = navController) }
+            composable(NavHomeManager.RegisterTravel.route) { travelForm(navController, id, idUserLogged) }
         }
     }
 }

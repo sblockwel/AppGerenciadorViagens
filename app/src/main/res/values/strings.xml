@@ -9,4 +9,7 @@
     <string name="Home">Home</string>
     <string name="Travels">Travels</string>
     <string name="About">About</string>
+    <string name="RegTravel" />
+    <string name="Spent" />
+    <string name="RegSpent" />
 </resources>

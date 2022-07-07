@@ -26,4 +26,6 @@ class PersonRepository(app: Application) {
     suspend fun findById(id: Int) = personDao.findById(id)
 
     suspend fun delete(person: Person) = personDao.delete(person)
+
+    suspend fun login(login: String, senha: String): Person? = personDao.login(login,senha)
 }

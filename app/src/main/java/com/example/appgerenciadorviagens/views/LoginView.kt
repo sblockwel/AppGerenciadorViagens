@@ -5,7 +5,7 @@ import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -15,15 +15,39 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.appgerenciadorviagens.R
 import com.example.appgerenciadorviagens.componente.PasswordField
-import com.example.appgerenciadorviagens.navigation.NavHomeManager
+import com.example.appgerenciadorviagens.model.Person
 import com.example.appgerenciadorviagens.navigation.NavManager
-import com.example.appgerenciadorviagens.viewModels.LoginViewModel
 import com.example.appgerenciadorviagens.viewModels.PersonViewModel
 import com.example.appgerenciadorviagens.viewModels.RegisterPersonViewModelFactory
 
 @Composable
-fun loginView(navController: NavHostController) {
-    val loginModel: LoginViewModel = viewModel()
+fun StateLogin(navController: NavHostController) {
+    var isLogged by remember {
+        mutableStateOf(false)
+    }
+    var loginUser by remember {
+        mutableStateOf("")
+    }
+    var userId by remember {
+        mutableStateOf(0)
+    }
+    if (isLogged) {
+        navController.navigate("home/$loginUser/$userId")
+    } else {
+        loginView(
+            onSuccess = {
+                isLogged = true
+                userId = it.id
+                loginUser = it.name
+            },
+            navController = navController
+        )
+    }
+}
+
+
+@Composable
+fun loginView(onSuccess: (Person) -> Unit, navController: NavHostController) {
     Card(
         elevation = 10.dp,
         modifier = Modifier
@@ -52,9 +76,9 @@ fun loginView(navController: NavHostController) {
                     .size(100.dp)
                     .padding(start = 8.dp)
             )
-            if (loginModel.username.isNotBlank()) {
+            if (personModel.username.isNotBlank()) {
                 Text(
-                    text = "Bem-Vindo(a), ${loginModel.username}",
+                    text = "Bem-Vindo(a), ${personModel.username}",
                     style = MaterialTheme.typography.h6
                 )
             }
@@ -67,13 +91,13 @@ fun loginView(navController: NavHostController) {
             ) {
                 OutlinedTextField(
                     modifier = Modifier.fillMaxWidth(),
-                    value = loginModel.username,
-                    onValueChange = { loginModel.username = it },
+                    value = personModel.username,
+                    onValueChange = { personModel.username = it },
                     label = { Text("Usuário") },
                 )
                 PasswordField(
-                    value = loginModel.password,
-                    onChange = { loginModel.password = it },
+                    value = personModel.password,
+                    onChange = { personModel.password = it },
                     label = "Senha",
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -93,16 +117,16 @@ fun loginView(navController: NavHostController) {
                 )
                 Button(
                     onClick = {
-                        if (loginModel.username.equals("admin") && loginModel.password.equals("admin")) {
-                            Toast.makeText(context, "Logado!", Toast.LENGTH_SHORT).show()
-                            navController.navigate(NavHomeManager.Home.route) { }
-                        } else {
-                            Toast.makeText(context, "Login inválido!", Toast.LENGTH_SHORT)
-                                .show()
-
-                        }
+                        personModel.login(
+                            onSucess = {
+                                onSuccess(it)
+                                Toast.makeText(context, "Logado!", Toast.LENGTH_SHORT).show()
+                            },
+                            onNotFound = {
+                                Toast.makeText(context, "Login inválido!", Toast.LENGTH_SHORT)
+                                    .show()
+                            })
                     },
-                    modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(text = "Entrar")
                 }
