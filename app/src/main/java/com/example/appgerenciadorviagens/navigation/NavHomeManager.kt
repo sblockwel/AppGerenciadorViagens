@@ -18,7 +18,7 @@ sealed class NavHomeManager(
     object Travels : NavHomeManager("travels", R.string.Travels, Icons.Filled.Map)
     object About : NavHomeManager("about", R.string.About, Icons.Filled.Info)
 
-    object RegisterTravel : NavHomeManager("registerTravel", R.string.RegTravel, Icons.Filled.Face)
-    object Spent: NavHomeManager("spent", R.string.Spent, Icons.Filled.Face)
+    //object RegisterTravel : NavHomeManager("registerTravel", R.string.RegTravel, Icons.Filled.Face)
+    //object Spent: NavHomeManager("spent", R.string.Spent, Icons.Filled.Face)
     object RegisterSpent: NavHomeManager("registerSpent", R.string.RegSpent, Icons.Filled.Face)
 }

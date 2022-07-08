@@ -10,10 +10,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
+import androidx.navigation.NavType
+import androidx.navigation.compose.*
 import com.example.appgerenciadorviagens.navigation.NavHomeManager
 import com.example.appgerenciadorviagens.navigation.NavManager
 
@@ -58,61 +56,29 @@ fun principalNavigation(nameUserLogged: String, idUserLogged: Int) {
         ) {
             composable(NavHomeManager.Home.route) { homeView() }
             composable(NavHomeManager.Travels.route) { travelCompose(navController = navController, idUserLogged) }
-            composable(NavHomeManager.About.route) { aboutView(navController = navController) }
-            formTravelGrap(navController, idUserLogged)
-            formDespesaGrap(navController, idUserLogged)
-        }
-    }
-}
-/*
+            composable(NavHomeManager.About.route) {
+                // aboutView(navController = navController)
+                travelFormCompose(navController, 0, 1)
 
-Scaffold(
-bottomBar = {
-    androidx.compose.material.BottomNavigation(
-        backgroundColor = MaterialTheme.colors.secondary,
-//        contentColor = Color.Black
-    ) {
-        val navBackStackEntry by navController.currentBackStackEntryAsState()
-        val currentRoute = navBackStackEntry?.destination?.route
-        items.forEach { item ->
-            BottomNavigationItem(
-                icon = { Icon(item.icon, contentDescription = null) },
-                label = {
-                    Text(
-                        text = stringResource(item.resourceId),
-                        fontSize = 12.sp
-                    )
-                },
-                selectedContentColor = Color.Black,
-                unselectedContentColor = Color.Black.copy(0.4f),
-                alwaysShowLabel = true,
-                selected = currentRoute == item.route,
-                onClick = {
-                    navController.navigate(item.route) {
-
-                        navController.graph.startDestinationRoute?.let { screen_route ->
-                            popUpTo(screen_route) {
-                                saveState = true
-                            }
-                        }
-                        launchSingleTop = true
-                        restoreState = true
+            }
+            composable("registerTravel/{travelId}/{UserId}",
+                arguments = listOf(
+                    navArgument("travelId") {
+                        type = NavType.IntType
+                    },
+                    navArgument("UserId") {
+                        type = NavType.IntType
                     }
+                )
+            ) {
+                val id = it.arguments?.getInt("travelId")
+                val idUser = it.arguments?.getInt("UserId")
+                if (idUser != null) {
+                    travelFormCompose(navController, id, idUser)
                 }
-            )
+            }
+           // formTravelGrap(navController, idUserLogged)
+            //formDespesaGrap(navController, idUserLogged)
         }
     }
 }
-) { innerPadding ->
-    NavHost(
-        navController = navController,
-        startDestination = ScreenManager.Home.route,
-        Modifier.padding(innerPadding)
-    ) {
-        composable(ScreenManager.Home.route) { HomeCompose() }
-        composable(ScreenManager.Viagens.route) { ViagensCompose(navController = navController) }
-        composable(ScreenManager.Sobre.route) { SobreCompose() }
-//            composable(ScreenManager.FormViagem.route) { FormViagem(navController = navController, 0) }
-        formViagemGrap(navController)
-    }
-}*/

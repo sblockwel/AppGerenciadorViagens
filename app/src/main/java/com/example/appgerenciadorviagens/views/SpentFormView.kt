@@ -21,7 +21,7 @@ import com.example.appgerenciadorviagens.navigation.NavHomeManager
 import com.example.appgerenciadorviagens.viewModels.RegisterTravelViewModelFactory
 import com.example.appgerenciadorviagens.viewModels.TravelViewModel
 import com.example.appgerenciadorviagens.viewModels.enumerator.TravelTypeEnum
-
+/*
 @Composable
 fun SpentForm(navController: NavHostController, idTravel: Int?, idSpent: Int) {
     Scaffold(
@@ -37,13 +37,13 @@ fun SpentForm(navController: NavHostController, idTravel: Int?, idSpent: Int) {
     val context = LocalContext.current
     val app = context.applicationContext as Application
 
-    val travelFormModel: TravelViewModel = viewModel(
+    val spentViewModel: SpentViewModel = viewModel(
         factory = RegisterTravelViewModelFactory(app)
     )
 
     if (idSpent != null && idSpent > 0) {
-        travelFormModel.id = idSpent
-        travelFormModel.findById(idSpent)
+        spentViewModel.id = idSpent
+        spentViewModel.findById(idSpent)
     }
     Card(
         elevation = 10.dp,
@@ -59,11 +59,9 @@ fun SpentForm(navController: NavHostController, idTravel: Int?, idSpent: Int) {
                 .padding(all = 15.dp)
                 .fillMaxSize()
         ) {
-            ExposedDropdownMenuBox(expanded = exp, onExpandedChange = { exp = !exp }) {
+            /*ExposedDropdownMenuBox(expanded = exp, onExpandedChange = { exp = !exp }) {
                 TextField(
                     value = selectedOption,
-//                    modifier = Modifier
-//                        .fillMaxWidth(),
                     onValueChange = { selectedOption = it },
                     label = { Text("Selecione ou digite a categoria") },
                     trailingIcon = {
@@ -84,52 +82,36 @@ fun SpentForm(navController: NavHostController, idTravel: Int?, idSpent: Int) {
                         }
                     }
                 }
-            }
-            if (id != null && id > 0) {
-                Text(text = "Editar viagem")
+            }*/
+            if (idSpent != null && idSpent > 0) {
+                Text(text = "Editar despesa")
             } else {
-                Text(text = "Nova viagem")
+                Text(text = "Nova Despesa")
             }
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
-                value = travelFormModel.destiny,
-                onValueChange = { travelFormModel.destiny = it },
-                label = { Text("Destino") },
+                value = spentViewModel.description,
+                onValueChange = { spentViewModel.description = it },
+                label = { Text("Descrição") },
             )
-            Row() {
-                RadioButton(
-                    selected = TravelTypeEnum.LEISURE == travelFormModel.type,
-                    onClick = { travelFormModel.type = TravelTypeEnum.LEISURE },
-                )
-                Text(text = "Lazer")
-
-                Spacer(modifier = Modifier.height(10.dp))
-
-                RadioButton(
-                    selected = TravelTypeEnum.BUSINESS == travelFormModel.type,
-                    onClick = { travelFormModel.type = TravelTypeEnum.BUSINESS }
-                )
-                Text(text = "Trabalho")
-            }
-            travelFormModel.departureDate = datePicker("Data de partida", travelFormModel.departureDate)
-            travelFormModel.arrivalDate = datePicker("Data de chegada", travelFormModel.arrivalDate )
+            spentViewModel.date = datePicker("Data", spentViewModel.date)
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
-                value = travelFormModel.budget.toString(),
+                value = spentViewModel.value.toString(),
                 onValueChange = {
                     try {
-                        travelFormModel.budget = it.toDoubleOrNull()!!
+                        spentViewModel.value = it.toDoubleOrNull()!!
                     } catch (e: Exception) {
                         Log.e("app", "Erro de conversão!!")
                     }
                 },
-                label = { Text("Orçamento") },
+                label = { Text("Valor") },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             )
             Spacer(
                 modifier = Modifier.height(16.dp)
             )
-            travelFormModel.user = idUserLogged
+            //spentViewModel.user = idUserLogged
             Row() {
                 Button(onClick = {
                     navController.navigateUp() }
@@ -139,12 +121,12 @@ fun SpentForm(navController: NavHostController, idTravel: Int?, idSpent: Int) {
                 Spacer(modifier = Modifier.height(16.dp))
                 Button(
                     onClick = {
-                        if (id != null && id > 0) {
-                            travelFormModel.id = id
+                        if (idSpent != null && idSpent > 0) {
+                            spentViewModel.id = idSpent
                             Toast
                                 .makeText(
                                     context,
-                                    "Viagem editada com sucesso!",
+                                    "Despesa editada!",
                                     Toast.LENGTH_SHORT
                                 )
                                 .show()
@@ -152,14 +134,14 @@ fun SpentForm(navController: NavHostController, idTravel: Int?, idSpent: Int) {
                             Toast
                                 .makeText(
                                     context,
-                                    "Viagem cadastrada com sucesso!",
+                                    "Despesa cadastrada!",
                                     Toast.LENGTH_SHORT
                                 )
                                 .show()
 
                         }
-                        travelFormModel.register()
-                        navController.navigate(NavHomeManager.Travels.route)
+                        spentViewModel.register()
+                        navController.navigate(NavHomeManager.Spent.route)
                     }
                 ) {
                     Text(text = "Salvar")
@@ -168,8 +150,8 @@ fun SpentForm(navController: NavHostController, idTravel: Int?, idSpent: Int) {
                 Button(onClick = {
                 }
                 ) {
-                    if (id != null) {
-                        travelFormModel.deleteById(id)
+                    if (idSpent != null) {
+                        spentViewModel.deleteById(idSpent)
                     }
                     navController.navigate(NavHomeManager.Travels.route)
                     Text(text = "Excluir")
@@ -178,4 +160,4 @@ fun SpentForm(navController: NavHostController, idTravel: Int?, idSpent: Int) {
         }
 
     }
-}
+}*/

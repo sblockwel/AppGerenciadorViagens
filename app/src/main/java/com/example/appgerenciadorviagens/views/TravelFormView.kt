@@ -17,7 +17,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.appgerenciadorviagens.componente.datePicker
-import com.example.appgerenciadorviagens.model.Travel
 import com.example.appgerenciadorviagens.navigation.NavHomeManager
 import com.example.appgerenciadorviagens.viewModels.RegisterTravelViewModelFactory
 import com.example.appgerenciadorviagens.viewModels.TravelViewModel
@@ -25,8 +24,9 @@ import com.example.appgerenciadorviagens.viewModels.enumerator.TravelTypeEnum
 
 
 @Composable
-fun travelForm(navController: NavHostController, id: Int?, idUserLogged: Int) {
-    Scaffold(
+fun travelFormCompose(navController: NavHostController, id: Int?, idUserLogged: Int) {
+    Log.i("TravelForm", "entrou ${id}")
+    /*Scaffold(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = { navController.navigate(NavHomeManager.RegisterSpent.route) }) {
@@ -34,8 +34,24 @@ fun travelForm(navController: NavHostController, id: Int?, idUserLogged: Int) {
             }
         },
         isFloatingActionButtonDocked = true,
-    ) {}
-
+    ) {
+        Column(
+            modifier = Modifier.padding(10.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Spacer(modifier = Modifier.padding(7.dp))
+            travelForm(navController = navController, id, idUserLogged)
+        }
+    }*/
+    travelForm(navController = navController, id, idUserLogged)
+    /* Column() {
+        Text(text = "teste")
+        
+    } */
+}
+@Composable
+fun travelForm(navController: NavHostController, id: Int?, idUserLogged: Int) {
     val context = LocalContext.current
     val app = context.applicationContext as Application
 
@@ -64,7 +80,7 @@ fun travelForm(navController: NavHostController, id: Int?, idUserLogged: Int) {
             if (id != null && id > 0) {
                 Text(text = "Editar viagem")
             } else {
-                Text(text = "Nova viagem")
+                Text(text = "Novva iagem")
             }
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
@@ -87,8 +103,9 @@ fun travelForm(navController: NavHostController, id: Int?, idUserLogged: Int) {
                 )
                 Text(text = "Trabalho")
             }
-            travelFormModel.departureDate = datePicker("Data de partida", travelFormModel.departureDate)
-            travelFormModel.arrivalDate = datePicker("Data de chegada", travelFormModel.arrivalDate )
+            travelFormModel.departureDate =
+                datePicker("Data de partida", travelFormModel.departureDate)
+            travelFormModel.arrivalDate = datePicker("Data de chegada", travelFormModel.arrivalDate)
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
                 value = travelFormModel.budget.toString(),
@@ -108,7 +125,8 @@ fun travelForm(navController: NavHostController, id: Int?, idUserLogged: Int) {
             travelFormModel.user = idUserLogged
             Row() {
                 Button(onClick = {
-                    navController.navigateUp() }
+                    navController.navigateUp()
+                }
                 ) {
                     Text(text = "Voltar")
                 }
@@ -120,7 +138,7 @@ fun travelForm(navController: NavHostController, id: Int?, idUserLogged: Int) {
                             Toast
                                 .makeText(
                                     context,
-                                    "Viagem editada com sucesso!",
+                                    "Viagem editada!",
                                     Toast.LENGTH_SHORT
                                 )
                                 .show()
@@ -128,7 +146,7 @@ fun travelForm(navController: NavHostController, id: Int?, idUserLogged: Int) {
                             Toast
                                 .makeText(
                                     context,
-                                    "Viagem cadastrada com sucesso!",
+                                    "Viagem cadastrada!",
                                     Toast.LENGTH_SHORT
                                 )
                                 .show()
@@ -142,12 +160,13 @@ fun travelForm(navController: NavHostController, id: Int?, idUserLogged: Int) {
                 }
                 Spacer(modifier = Modifier.height(16.dp))
                 Button(onClick = {
-                    }
-                ) {
                     if (id != null) {
                         travelFormModel.deleteById(id)
                     }
                     navController.navigate(NavHomeManager.Travels.route)
+
+                }
+                ) {
                     Text(text = "Excluir")
                 }
             }

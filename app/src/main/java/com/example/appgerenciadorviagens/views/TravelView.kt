@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.rounded.BeachAccess
 import androidx.compose.material.icons.rounded.Surfing
 import androidx.compose.material.icons.rounded.Work
 import androidx.compose.runtime.*
@@ -20,12 +21,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
-import androidx.navigation.NavType
+import androidx.navigation.*
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navArgument
-import androidx.navigation.navigation
 import com.example.appgerenciadorviagens.model.Travel
 import com.example.appgerenciadorviagens.navigation.NavHomeManager
 import com.example.appgerenciadorviagens.viewModels.RegisterTravelViewModelFactory
@@ -60,7 +58,10 @@ fun travelCompose(navController: NavHostController, idUserLogged: Int) {
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { navController.navigate(NavHomeManager.RegisterTravel.route) }) {
+                onClick = {
+                    navController.navigate("registerTravel/0/$idUserLogged")
+                }
+            ) {
                 Icon(Icons.Filled.Add, contentDescription = "Nova Viagem")
             }
         },
@@ -102,7 +103,7 @@ fun TravelCards(
                         Toast.LENGTH_SHORT
                     )
                     .show()
-                navController.navigate(NavHomeManager.RegisterTravel.route + "/" + travel.id + "/" + idUserLogged)
+                navController.navigate( "registerTravel/" + travel.id + "/" + idUserLogged)
             }
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -110,7 +111,7 @@ fun TravelCards(
 
             if (travel.type == TravelTypeEnum.LEISURE) {
                 Icon(
-                    imageVector = Icons.Rounded.Surfing,
+                    imageVector = Icons.Rounded.BeachAccess,
                     contentDescription = null,
                     modifier = Modifier
                         .size(60.dp)
@@ -163,7 +164,7 @@ fun TravelCards(
 
 
 fun NavGraphBuilder.formTravelGrap(navController: NavHostController, idUserLogged: Int) {
-    navigation(startDestination = "principal", route = "viagens") {
+    navigation(startDestination = "principal", route = "travel") {
         composable("principal") { travelCompose(navController, idUserLogged) }
         composable("registerTravel/{travelId}/{UserId}",
             arguments = listOf(
@@ -178,7 +179,7 @@ fun NavGraphBuilder.formTravelGrap(navController: NavHostController, idUserLogge
             val id = it.arguments?.getInt("travelId")
             val idUser = it.arguments?.getInt("UserId")
             if (idUser != null) {
-                travelForm(navController, id, idUser)
+                travelFormCompose(navController, id, idUser)
             }
         }
     }
