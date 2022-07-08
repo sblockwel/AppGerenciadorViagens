@@ -26,7 +26,7 @@ import com.example.appgerenciadorviagens.viewModels.enumerator.TravelTypeEnum
 @Composable
 fun travelFormCompose(navController: NavHostController, id: Int?, idUserLogged: Int) {
     Log.i("TravelForm", "entrou ${id}")
-    /*Scaffold(
+    Scaffold(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = { navController.navigate(NavHomeManager.RegisterSpent.route) }) {
@@ -43,12 +43,8 @@ fun travelFormCompose(navController: NavHostController, id: Int?, idUserLogged: 
             Spacer(modifier = Modifier.padding(7.dp))
             travelForm(navController = navController, id, idUserLogged)
         }
-    }*/
-    travelForm(navController = navController, id, idUserLogged)
-    /* Column() {
-        Text(text = "teste")
-        
-    } */
+    }
+    //travelForm(navController = navController, id, idUserLogged)
 }
 @Composable
 fun travelForm(navController: NavHostController, id: Int?, idUserLogged: Int) {
