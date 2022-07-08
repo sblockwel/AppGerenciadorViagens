@@ -28,14 +28,14 @@ class SpentViewModel(private val spentRepository: SpentRepository) : ViewModel()
 
     var category by mutableStateOf(0)
 
-    //var nameCategory by mutableStateOf()
+    var nameCategory by mutableStateOf(Category(""))
 
     private fun mutableStateOf() {
         TODO("Not yet implemented")
     }
 
     fun register() {
-        val spent = Spent(date, value, description, local, travel, category)
+        val spent = Spent(date, value, description, local, travel, category, nameCategory)
         viewModelScope.launch {
             spentRepository.insert(spent)
         }

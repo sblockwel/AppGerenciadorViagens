@@ -59,7 +59,7 @@ fun travelCompose(navController: NavHostController, idUserLogged: Int) {
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    navController.navigate("registerTravel/0/$idUserLogged")
+                    navController.navigate(NavHomeManager.RegisterTravel.route)
                 }
             ) {
                 Icon(Icons.Filled.Add, contentDescription = "Nova Viagem")

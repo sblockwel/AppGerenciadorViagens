@@ -27,9 +27,10 @@ import androidx.navigation.navigation
 import com.example.appgerenciadorviagens.model.Spent
 import com.example.appgerenciadorviagens.navigation.NavHomeManager
 import com.example.appgerenciadorviagens.viewModels.RegisterSpentViewModelFactory
+import com.example.appgerenciadorviagens.viewModels.SpentViewModel
 import java.text.DecimalFormat
 
-/*
+
 @Composable
 fun SpentCompose(navController: NavHostController, idTravel: Int, destinyTravel: String) {
     Scaffold(
@@ -112,7 +113,7 @@ fun spentCards(
                     .padding(10.dp)
                     .weight(1f)
             ) {
-                Text(text = "Categoria: ${spent.categoryId}")
+                Text(text = "Categoria: ${spent.category}")
                 Spacer(modifier = Modifier.padding(3.dp))
                 Text(
                     text = "Local: " + spent.local,
@@ -136,4 +137,4 @@ fun spentCards(
         }
     }
 }
-*/
+

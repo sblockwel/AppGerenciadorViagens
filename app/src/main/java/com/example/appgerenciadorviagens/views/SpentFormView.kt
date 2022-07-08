@@ -19,9 +19,8 @@ import androidx.navigation.NavHostController
 import com.example.appgerenciadorviagens.componente.datePicker
 import com.example.appgerenciadorviagens.navigation.NavHomeManager
 import com.example.appgerenciadorviagens.viewModels.RegisterTravelViewModelFactory
-import com.example.appgerenciadorviagens.viewModels.TravelViewModel
-import com.example.appgerenciadorviagens.viewModels.enumerator.TravelTypeEnum
-/*
+import com.example.appgerenciadorviagens.viewModels.SpentViewModel
+
 @Composable
 fun SpentForm(navController: NavHostController, idTravel: Int?, idSpent: Int) {
     Scaffold(
@@ -111,7 +110,6 @@ fun SpentForm(navController: NavHostController, idTravel: Int?, idSpent: Int) {
             Spacer(
                 modifier = Modifier.height(16.dp)
             )
-            //spentViewModel.user = idUserLogged
             Row() {
                 Button(onClick = {
                     navController.navigateUp() }
@@ -160,4 +158,4 @@ fun SpentForm(navController: NavHostController, idTravel: Int?, idSpent: Int) {
         }
 
     }
-}*/
+}
